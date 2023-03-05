@@ -3,7 +3,7 @@ architectury {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/template_mod.accesswidener")
+    accessWidenerPath = file("src/main/resources/enchantery.accesswidener")
 }
 
 dependencies {
@@ -11,10 +11,7 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-    //implementation fileTree(dir: 'mods', include: '*.jar')
-
-    modImplementation("net.mehvahdjukaar:moonlight:${project.moonlight_version}")
-    //modImplementation("curse.maven:selene-499980:3859470")
+    modImplementation("curse.maven:selene-499980:4414988")
 }
 
 publishing {

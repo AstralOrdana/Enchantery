@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:candles",
+    "minecraft:amethyst_cluster",
+    "minecraft:spore_blossom",
+    "minecraft:lapis_block"
+  ]
+}

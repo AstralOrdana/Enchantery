@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:unbreaking",
+    "minecraft:protection",
+    "minecraft:efficiency",
+    "minecraft:sharpness",
+    "minecraft:impaling",
+    "minecraft:power",
+    "minecraft:binding_curse",
+    "minecraft:vanishing_curse"
+  ]
+}

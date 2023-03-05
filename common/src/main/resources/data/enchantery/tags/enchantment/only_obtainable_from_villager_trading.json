@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:blast_protection",
+    "minecraft:projectile_protection",
+    "minecraft:fire_protection",
+    "minecraft:aqua_affinity",
+    "minecraft:depth_strider",
+    "minecraft:bane_of_arthropods",
+    "minecraft:smite",
+    "minecraft:sweeping",
+    "minecraft:knockback",
+    "minecraft:punch",
+    "minecraft:piercing",
+    "minecraft:quick_charge",
+    "minecraft:loyalty",
+    "minecraft:silk_touch"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#enchantery:mob_heads",
+    "minecraft:redstone_wire"
+  ]
+}
