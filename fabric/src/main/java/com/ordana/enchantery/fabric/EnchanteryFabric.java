@@ -20,5 +20,7 @@ public class EnchanteryFabric implements ModInitializer {
         if (PlatformHelper.getEnv().isClient()) {
             FabricSetupCallbacks.CLIENT_SETUP.add(EnchanteryClient::init);
         }
+
+        FabricSetupCallbacks.COMMON_SETUP.add(Enchantery::commonSetup);
     }
 }
