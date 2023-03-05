@@ -101,7 +101,7 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
                             var enchList = EnchantmentHelper.getEnchantments(barrel.getItem(j));
 
                             for (Enchantment enchantment2 : enchList.keySet()) {
-                                if (enchantment2.category.canEnchant(stack.getItem())) list.add(new EnchantmentInstance(enchantment2, enchList.get(enchantment2) + getEnchantmentAugments()));
+                                if (enchantment2.category.canEnchant(stack.getItem())) list.add(new EnchantmentInstance(enchantment2, (random.nextInt(enchList.get(enchantment2) + getEnchantmentAugments())) + 1));
                             }
                         }
                     }
