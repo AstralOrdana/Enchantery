@@ -24,6 +24,8 @@ public class EnchanteryClient {
     private static void registerParticles(ClientPlatformHelper.ParticleEvent event) {
         event.register(Enchantery.COLORED_RUNE.get(), Provider::new);
         event.register(Enchantery.AMETHYST_PARTICLE.get(), Provider::new);
+        event.register(Enchantery.FLAME_PARTICLE.get(), Provider::new);
+        event.register(Enchantery.CURSE_PARTICLE.get(), Provider::new);
     }
 
     public static void addEnchantParticles(Level level, BlockPos pos, BlockPos target) {
@@ -32,7 +34,7 @@ public class EnchanteryClient {
             if (type == EnchanteryLogic.EnchantmentInfluencer.STABILIZER) {
                 RandomSource random = level.random;
                 var particle = Enchantery.AMETHYST_PARTICLE.get();
-                if (type == BlockTags.CANDLES) particle = ParticleTypes.FLAME;
+                if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
                 level.addParticle(
                         particle,
                         pos.getX() + 0.5,
