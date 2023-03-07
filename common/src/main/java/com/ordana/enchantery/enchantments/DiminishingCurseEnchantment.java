@@ -39,11 +39,10 @@ public class DiminishingCurseEnchantment extends Enchantment {
         return stack.isDamageableItem() || super.canEnchant(stack);
     }
 
-    public static boolean shouldIgnoreDurabilityDrop(ItemStack stack, int level, RandomSource random) {
-        if (stack.getItem() instanceof ArmorItem && random.nextFloat() < 0.6F) {
-            return false;
-        } else {
-            return random.nextInt(level + 1) > 0;
+    public static void loseExtraDurability(ItemStack stack, RandomSource random) {
+        if (random.nextBoolean()) {
+            int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DIMINISHING_CURSE.get(), stack);
+            if (f > 0) stack.setDamageValue(stack.getDamageValue() - 1);
         }
     }
 

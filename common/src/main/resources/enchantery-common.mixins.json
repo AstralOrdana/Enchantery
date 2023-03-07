@@ -6,6 +6,9 @@
   "client": [
   ],
   "mixins": [
+    "EnchantmentMenuMixin",
+    "EnchantmentTableBlockMixin",
+    "ItemStackMixin",
     "enchantment_mixins.ArrowDamageEnchantmentMixin",
     "enchantment_mixins.ArrowFireEnchantmentMixin",
     "enchantment_mixins.ArrowInfiniteEnchantmentMixin",
@@ -15,8 +18,6 @@
     "enchantment_mixins.DamageEnchantmentMixin",
     "enchantment_mixins.DigDurabilityEnchantmentMixin",
     "enchantment_mixins.DiggingEnchantmentMixin",
-    "EnchantmentMenuMixin",
-    "EnchantmentTableBlockMixin",
     "enchantment_mixins.FireAspectEnchantmentMixin",
     "enchantment_mixins.FishingSpeedEnchantmentMixin",
     "enchantment_mixins.FrostWalkerEnchantmentMixin",

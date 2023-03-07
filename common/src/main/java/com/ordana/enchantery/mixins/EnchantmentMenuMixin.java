@@ -19,7 +19,9 @@ import java.util.List;
 @Mixin(EnchantmentMenu.class)
 public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
 
-    @Shadow @Final private RandomSource random;
+    @Shadow
+    @Final
+    private RandomSource random;
 
     @Final
     @Shadow
