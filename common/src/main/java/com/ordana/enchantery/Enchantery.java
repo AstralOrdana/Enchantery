@@ -1,17 +1,13 @@
 package com.ordana.enchantery;
 
+import com.ordana.enchantery.loot_modifiers.LootTableOverrides;
+import com.ordana.enchantery.reg.ModEnchants;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.EnchantmentMenu;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.Supplier;
 
 public class Enchantery {
 
@@ -24,6 +20,7 @@ public class Enchantery {
 
     public static void commonInit() {
         LootTableOverrides.INSTANCE.register();
+        ModEnchants.init();
 
     }
 

@@ -1,5 +1,6 @@
-package com.ordana.enchantery;
+package com.ordana.enchantery.configs;
 
+import com.ordana.enchantery.Enchantery;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigBuilder;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigSpec;
 import net.mehvahdjukaar.moonlight.api.platform.configs.ConfigType;

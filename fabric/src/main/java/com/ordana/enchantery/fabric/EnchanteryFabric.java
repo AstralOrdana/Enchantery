@@ -1,6 +1,6 @@
 package com.ordana.enchantery.fabric;
 
-import com.ordana.enchantery.LootTableInjects;
+import com.ordana.enchantery.loot_modifiers.LootTableInjects;
 import net.fabricmc.api.ModInitializer;
 import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;

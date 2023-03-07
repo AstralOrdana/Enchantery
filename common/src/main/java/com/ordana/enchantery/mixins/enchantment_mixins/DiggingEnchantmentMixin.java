@@ -1,7 +1,7 @@
 package com.ordana.enchantery.mixins.enchantment_mixins;
 
 import com.ordana.enchantery.EnchanteryLogic;
-import com.ordana.enchantery.ModTags;
+import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.DiggingEnchantment;
 import net.minecraft.world.item.enchantment.Enchantment;

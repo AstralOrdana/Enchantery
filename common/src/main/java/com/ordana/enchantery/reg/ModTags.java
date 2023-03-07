@@ -1,4 +1,4 @@
-package com.ordana.enchantery;
+package com.ordana.enchantery.reg;
 
 import com.ordana.enchantery.Enchantery;
 import net.minecraft.core.Registry;

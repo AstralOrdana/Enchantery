@@ -1,6 +1,7 @@
-package com.ordana.enchantery;
+package com.ordana.enchantery.loot_modifiers;
 
 import com.google.gson.JsonElement;
+import com.ordana.enchantery.Enchantery;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesProvider;

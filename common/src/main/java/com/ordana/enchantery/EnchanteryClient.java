@@ -1,10 +1,9 @@
 package com.ordana.enchantery;
 
+import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.particles.EnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 
@@ -16,9 +15,9 @@ public class EnchanteryClient {
     }
 
     private static void registerParticles(ClientPlatformHelper.ParticleEvent event) {
-        event.register(Enchantery.COLORED_RUNE.get(), EnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.COLORED_RUNE.get(), EnchantingParticle.ProviderAgument::new);
         event.register(Enchantery.AMETHYST_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.FLAME_PARTICLE.get(), EnchantingParticle.ProviderAgument::new);
+        event.register(Enchantery.FLAME_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
         event.register(Enchantery.CURSE_PARTICLE.get(), EnchantingParticle.ProviderCurse::new);
     }
 
@@ -28,7 +27,7 @@ public class EnchanteryClient {
             if(type != null) {
                 RandomSource random = level.random;
                 var particle = type.particle;
-                if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
+                //if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
                 level.addParticle(
                         particle,
                         pos.getX() + 0.5,

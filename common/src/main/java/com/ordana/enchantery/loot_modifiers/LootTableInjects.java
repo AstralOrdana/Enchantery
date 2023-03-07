@@ -1,5 +1,6 @@
-package com.ordana.enchantery;
+package com.ordana.enchantery.loot_modifiers;
 
+import com.ordana.enchantery.Enchantery;
 import net.mehvahdjukaar.moonlight.api.platform.ForgeHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootPool;

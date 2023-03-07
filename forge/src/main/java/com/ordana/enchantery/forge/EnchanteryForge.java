@@ -2,11 +2,10 @@ package com.ordana.enchantery.forge;
 
 import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;
-import com.ordana.enchantery.LootTableInjects;
+import com.ordana.enchantery.loot_modifiers.LootTableInjects;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

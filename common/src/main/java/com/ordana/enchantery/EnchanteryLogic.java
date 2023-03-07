@@ -1,11 +1,10 @@
 package com.ordana.enchantery;
 
-import com.google.common.collect.Lists;
+import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
@@ -20,7 +19,6 @@ import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.EnchantmentTableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -31,90 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //put logic here, outside of mixins
 public class EnchanteryLogic {
-
-
-    //these can be deleted
-    @Deprecated
-    public static int getCurseAugments(ContainerLevelAccess access) {
-        AtomicInteger skulls = new AtomicInteger();
-
-        access.execute((level, blockPos) -> {
-            for (BlockPos blockPos2 : EnchantmentTableBlock.BOOKSHELF_OFFSETS) {
-                BlockPos pos = blockPos2.offset(blockPos);
-                if (level.getBlockState(pos).is(ModTags.CURSE_AUGMENTS)) {
-                    skulls.set(skulls.get() + 1);
-                }
-            }
-        });
-
-        return skulls.get();
-    }
-
-    @Deprecated
-    public static int getEnchantmentStabilizers(ContainerLevelAccess access) {
-        AtomicInteger candles = new AtomicInteger();
-
-        access.execute((level, blockPos) -> {
-            for (BlockPos blockPos2 : EnchantmentTableBlock.BOOKSHELF_OFFSETS) {
-                BlockPos pos = blockPos2.offset(blockPos);
-                if (level.getBlockState(pos).is(BlockTags.CANDLES)) {
-                    if (level.getBlockState(pos).getValue(BlockStateProperties.LIT))
-                        candles.getAndAdd(level.getBlockState(pos).getValue(BlockStateProperties.CANDLES));
-                }
-                if (level.getBlockState(pos).is(ModTags.ENCHANTMENT_STABILIZERS)) {
-                    candles.getAndAdd(4);
-                }
-            }
-        });
-
-        return candles.get();
-    }
-
-    @Deprecated
-    public static int getEnchantmentAugments(ContainerLevelAccess access) {
-        AtomicInteger clusters = new AtomicInteger();
-
-        access.execute((level, blockPos) -> {
-            for (BlockPos blockPos2 : EnchantmentTableBlock.BOOKSHELF_OFFSETS) {
-                BlockPos pos = blockPos2.offset(blockPos);
-                if (level.getBlockState(pos).is(ModTags.ENCHANTMENT_AUGMENTS)) {
-                    clusters.getAndAdd(1);
-                }
-            }
-        });
-
-        return clusters.get();
-    }
-
-    @Deprecated
-    public static List<EnchantmentInstance> getSourceBooks(ContainerLevelAccess access, ItemStack stack) {
-        List<EnchantmentInstance> list = Lists.newArrayList();
-
-        access.execute((level, blockPos) -> {
-            for (BlockPos bookshelfOffset : EnchantmentTableBlock.BOOKSHELF_OFFSETS) {
-                BlockPos pos = bookshelfOffset.offset(blockPos);
-                if (level.getBlockEntity(pos) instanceof Container container) {
-
-                    for (int j = 0; j < container.getContainerSize(); ++j) {
-                        if (container.getItem(j).is(Items.ENCHANTED_BOOK)) {
-                            var enchList = EnchantmentHelper.getEnchantments(container.getItem(j));
-
-                            for (var e : enchList.entrySet()) {
-                                Enchantment en = e.getKey();
-                                if (en.category.canEnchant(stack.getItem())) {
-                                    list.add(new EnchantmentInstance(en,
-                                            (level.random.nextInt(e.getValue() + getEnchantmentAugments(access))) + 1));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        return list;
-    }
-
 
     public static void modifyEnchantmentList(ContainerLevelAccess access, RandomSource random, ItemStack stack,
                                              List<EnchantmentInstance> list) {
