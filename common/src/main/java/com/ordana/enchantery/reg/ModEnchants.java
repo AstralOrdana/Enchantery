@@ -20,5 +20,5 @@ public class ModEnchants extends Enchantment {
     }
 
     public static final Supplier<Enchantment> DIMINISHING_CURSE = RegHelper.registerEnchantment(
-            Enchantery.res("diminishing_curse"), () -> new DiminishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
+            Enchantery.res("diminishing_curse"), () -> new DiminishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
 }

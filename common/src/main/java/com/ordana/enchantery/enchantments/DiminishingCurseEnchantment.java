@@ -47,16 +47,6 @@ public class DiminishingCurseEnchantment extends Enchantment {
         }
     }
 
-    public void doPostHurt(LivingEntity target, Entity attacker, int level) {
-        RandomSource random = target.getRandom();
-        Map.Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.getRandomItemWith(ModEnchants.DIMINISHING_CURSE.get(), target);
-        //if (random.nextFloat() < 0.15F) {
-            if (entry != null) {
-                entry.getValue().hurtAndBreak(2, target, (arg) -> arg.broadcastBreakEvent(entry.getKey()));
-            }
-        //}
-    }
-
     @Override
     public boolean isTreasureOnly() {
         return !EnchanteryLogic.getHolder(this).is(ModTags.BASIC);
