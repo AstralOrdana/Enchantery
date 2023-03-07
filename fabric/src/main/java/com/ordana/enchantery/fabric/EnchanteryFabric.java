@@ -15,7 +15,9 @@ public class EnchanteryFabric implements ModInitializer {
 
         Enchantery.commonInit();
 
-        LootTableEvents.MODIFY.register((m, t, r, b, s) -> LootTableInjects.onLootInject(t, r, b::withPool));
+        LootTableEvents.MODIFY.register((m, t, r, b, s) -> {
+             LootTableInjects.onLootInject(t, r, b::withPool);
+        });
 
         if (PlatformHelper.getEnv().isClient()) {
             FabricSetupCallbacks.CLIENT_SETUP.add(EnchanteryClient::init);

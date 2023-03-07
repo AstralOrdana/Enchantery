@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
@@ -32,6 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class EnchanteryLogic {
 
 
+    //these can be deleted
     @Deprecated
     public static int getCurseAugments(ContainerLevelAccess access) {
         AtomicInteger skulls = new AtomicInteger();
@@ -191,7 +193,15 @@ public class EnchanteryLogic {
 
     //todo find better name
     public enum EnchantmentInfluencer {
-        AGUMENT, CURSE_AGUMENT, STABILIZER;
+        AGUMENT(Enchantery.COLORED_RUNE.get()),
+        CURSE_AGUMENT(Enchantery.CURSE_PARTICLE.get()),
+        STABILIZER(Enchantery.AMETHYST_PARTICLE.get());
+
+        public final SimpleParticleType particle;
+
+        EnchantmentInfluencer(SimpleParticleType simpleParticleType) {
+            this.particle = simpleParticleType;
+        }
 
         @Nullable
         public static EnchantmentInfluencer get(BlockState state) {
@@ -200,6 +210,7 @@ public class EnchanteryLogic {
             if (state.is(ModTags.CURSE_AUGMENTS)) return CURSE_AGUMENT;
             return null;
         }
+
     }
 
     @SuppressWarnings("all")
