@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class DiminishingCurseEnchantment extends Enchantment {
     public DiminishingCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.ARMOR, equipmentSlots);
+        super(rarity, EnchantmentCategory.BREAKABLE, equipmentSlots);
     }
 
     public int getMinCost(int level) {
