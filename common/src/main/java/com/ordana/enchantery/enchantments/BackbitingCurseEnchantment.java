@@ -8,9 +8,9 @@ import net.minecraft.world.item.enchantment.DigDurabilityEnchantment;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class DiminishingCurseEnchantment extends Enchantment {
-    public DiminishingCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.BREAKABLE, equipmentSlots);
+public class BackbitingCurseEnchantment extends Enchantment {
+    public BackbitingCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
+        super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
     }
 
     public int getMinCost(int level) {
@@ -26,7 +26,7 @@ public class DiminishingCurseEnchantment extends Enchantment {
     }
 
     public boolean canEnchant(ItemStack stack) {
-        return stack.isDamageableItem() || super.canEnchant(stack);
+        return super.canEnchant(stack);
     }
 
     @Override
@@ -49,7 +49,4 @@ public class DiminishingCurseEnchantment extends Enchantment {
         return true;
     }
 
-    public boolean checkCompatibility(Enchantment other) {
-        return !(other instanceof DigDurabilityEnchantment) && super.checkCompatibility(other);
-    }
 }

@@ -9,6 +9,7 @@
     "EnchantmentMenuMixin",
     "EnchantmentTableBlockMixin",
     "ItemStackMixin",
+    "SwordItemMixin",
     "enchantment_mixins.ArrowDamageEnchantmentMixin",
     "enchantment_mixins.ArrowFireEnchantmentMixin",
     "enchantment_mixins.ArrowInfiniteEnchantmentMixin",

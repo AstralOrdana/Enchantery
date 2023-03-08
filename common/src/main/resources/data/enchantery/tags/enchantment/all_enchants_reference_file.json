@@ -38,6 +38,8 @@
     "minecraft:impaling",
     "minecraft:power",
     "minecraft:binding_curse",
-    "minecraft:vanishing_curse"
+    "minecraft:vanishing_curse",
+    "enchantery:diminishing_curse",
+    "enchantery:backbiting_curse"
   ]
 }

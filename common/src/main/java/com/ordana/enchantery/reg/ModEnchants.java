@@ -1,6 +1,7 @@
 package com.ordana.enchantery.reg;
 
 import com.ordana.enchantery.Enchantery;
+import com.ordana.enchantery.enchantments.BackbitingCurseEnchantment;
 import com.ordana.enchantery.enchantments.DiminishingCurseEnchantment;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,14 +12,14 @@ import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.function.Supplier;
 
-public class ModEnchants extends Enchantment {
-    protected ModEnchants(Rarity rarity, EnchantmentCategory enchantmentCategory, EquipmentSlot[] equipmentSlots) {
-        super(rarity, enchantmentCategory, equipmentSlots);
-    }
+public class ModEnchants {
 
     public static void init() {
     }
 
     public static final Supplier<Enchantment> DIMINISHING_CURSE = RegHelper.registerEnchantment(
             Enchantery.res("diminishing_curse"), () -> new DiminishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
+
+    public static final Supplier<Enchantment> BACKBITING_CURSE = RegHelper.registerEnchantment(
+            Enchantery.res("backbiting_curse"), () -> new BackbitingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
 }

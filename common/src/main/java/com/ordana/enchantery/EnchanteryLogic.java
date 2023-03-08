@@ -77,7 +77,7 @@ public class EnchanteryLogic {
         //add curses
         int curses = malus.get() / 4;
         for (int i = 0; i < curses; i++) {
-            //to be checked. this can add duplicate curses
+            //TODO add check for curse compatibilty (ie no binding on tools) + remove duplicate curses
             list.add(new EnchantmentInstance(CURSES.get(random.nextInt(CURSES.size())), 1));
         }
 
