@@ -31,6 +31,6 @@ public class Enchantery {
     public static final RegSupplier<SimpleParticleType> COLORED_RUNE = RegHelper.registerParticle(res("colored_rune"));
     public static final RegSupplier<SimpleParticleType> AMETHYST_PARTICLE = RegHelper.registerParticle(res("amethyst_particle"));
     public static final RegSupplier<SimpleParticleType> CURSE_PARTICLE = RegHelper.registerParticle(res("curse_particle"));
-    public static final RegSupplier<SimpleParticleType> FLAME_PARTICLE = RegHelper.registerParticle(res("flame_particle"));
+    public static final RegSupplier<SimpleParticleType> STABILIZER_PARTICLE = RegHelper.registerParticle(res("stabilizer_particle"));
 
 }

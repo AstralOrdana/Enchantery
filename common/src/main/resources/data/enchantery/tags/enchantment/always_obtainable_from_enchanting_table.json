@@ -10,6 +10,8 @@
     "minecraft:binding_curse",
     "minecraft:vanishing_curse",
     "enchantery:diminishing_curse",
-    "enchantery:backbiting_curse"
+    "enchantery:backbiting_curse",
+    "enchantery:butterfingers_curse",
+    "enchantery:leeching_curse"
   ]
 }

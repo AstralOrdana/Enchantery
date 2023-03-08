@@ -1,13 +1,19 @@
 package com.ordana.enchantery;
 
+import com.ordana.enchantery.reg.ModEnchants;
 import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,6 +26,7 @@ import net.minecraft.world.level.block.EnchantmentTableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +36,43 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 //put logic here, outside of mixins
 public class EnchanteryLogic {
+
+    public static void leechingCurseLogic(Level level, Entity entity, int inventorySlot) {
+        ItemStack stack = entity.getSlot(inventorySlot).get();
+        int g = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.LEECHING_CURSE.get(), stack);
+        if (level.isClientSide()) return;
+
+        //Leeching Curse logic
+        if (level.random.nextInt(100) == 0) {
+            if (g > 0) {
+                int currentDam = stack.getDamageValue();
+                int maxDam = stack.getMaxDamage();
+                if (currentDam > 0) {
+                    if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam -8);
+                    else stack.setDamageValue(maxDam);
+                    entity.hurt(DamageSource.MAGIC, 1f);
+                }
+            }
+        }
+    }
+
+    public static void butterfingersCurseLogic(Level level, Entity entity, int inventorySlot, boolean isCurrentItem) {
+        ItemStack stack = entity.getSlot(inventorySlot).get();
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.BUTTERFINGER_CURSE.get(), stack);
+        if (level.isClientSide()) return;
+
+        //Butterfingers Curse logic
+        if (level.random.nextInt(100) == 0) {
+            if (isCurrentItem) {
+                if (f > 0 && entity instanceof ServerPlayer player) {
+                    player.drop(true);
+                    player.connection.send(new ClientboundContainerSetSlotPacket(-2, 0, player.getInventory().selected, ItemStack.EMPTY));
+                }
+            }
+        }
+    }
+
+
 
     public static void modifyEnchantmentList(ContainerLevelAccess access, RandomSource random, ItemStack stack,
                                              List<EnchantmentInstance> list) {
@@ -68,7 +112,7 @@ public class EnchanteryLogic {
         for (var e : enchants.entrySet()) {
             Enchantment en = e.getKey();
             if (en.category.canEnchant(stack.getItem())) {
-                list.add(new EnchantmentInstance(en, (random.nextInt(e.getValue() + aguments.get())) + 1));
+                list.add(new EnchantmentInstance(en, random.nextInt(e.getValue() + (aguments.get() > 1 ? 1 : 0))));
             }
         }
         //select single enchantment
@@ -107,9 +151,9 @@ public class EnchanteryLogic {
 
     //todo find better name
     public enum EnchantmentInfluencer {
-        AGUMENT(Enchantery.COLORED_RUNE.get()),
+        AGUMENT(Enchantery.AMETHYST_PARTICLE.get()),
         CURSE_AGUMENT(Enchantery.CURSE_PARTICLE.get()),
-        STABILIZER(Enchantery.AMETHYST_PARTICLE.get());
+        STABILIZER(Enchantery.STABILIZER_PARTICLE.get());
 
         public final SimpleParticleType particle;
 

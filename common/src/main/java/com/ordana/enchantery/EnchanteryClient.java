@@ -17,7 +17,7 @@ public class EnchanteryClient {
     private static void registerParticles(ClientPlatformHelper.ParticleEvent event) {
         event.register(Enchantery.COLORED_RUNE.get(), EnchantingParticle.ProviderAgument::new);
         event.register(Enchantery.AMETHYST_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.FLAME_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.STABILIZER_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
         event.register(Enchantery.CURSE_PARTICLE.get(), EnchantingParticle.ProviderCurse::new);
     }
 
