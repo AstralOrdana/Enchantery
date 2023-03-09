@@ -9,11 +9,13 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -72,13 +74,15 @@ public class EnchanteryLogic {
         }
     }
 
-    public static boolean devouringCurseLogic(Level level, ItemStack stack) {
+    public static boolean devouringCurseLogic(Player player,BlockState state, ItemStack stack) {
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DEVOURING_CURSE.get(), stack);
-        if (f > 0 && level.random.nextBoolean()) {
+        if (f > 0 && player.level.random.nextBoolean()) {
             int currentDam = stack.getDamageValue();
             if (currentDam > 0) {
                 stack.setDamageValue(currentDam-1);
             }
+            player.awardStat(Stats.BLOCK_MINED.get(state.getBlock()));
+            player.causeFoodExhaustion(0.005F);
             return true;
         }
         else return false;
