@@ -2,6 +2,7 @@ package com.ordana.enchantery.mixins;
 
 import com.ordana.enchantery.EnchanteryClient;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EnchantmentTableBlock;
 import org.spongepowered.asm.mixin.Final;
@@ -25,7 +26,7 @@ public abstract class EnchantmentTableBlockMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void bookshelfRange(CallbackInfo ci) {
-        BOOKSHELF_OFFSETS = BlockPos.betweenClosedStream(-3, 0, -3, 3, 3, 3).filter((blockPos)
+        BOOKSHELF_OFFSETS = BlockPos.betweenClosedStream(-3, 0, -3, 3, 2, 3).filter((blockPos)
                 -> Math.abs(blockPos.getX()) <= 3 || Math.abs(blockPos.getZ()) <= 3).map(BlockPos::immutable).toList();
     }
 
