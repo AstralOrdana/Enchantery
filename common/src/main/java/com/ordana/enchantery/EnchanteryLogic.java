@@ -78,7 +78,6 @@ public class EnchanteryLogic {
             int currentDam = stack.getDamageValue();
             if (currentDam > 0) {
                 stack.setDamageValue(currentDam - 1);
-                currentDam = stack.getDamageValue();
             }
             return true;
         }
