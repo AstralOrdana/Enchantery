@@ -41,7 +41,7 @@ public class EnchantingParticle extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             var p = super.createParticle(type, level, x, y, z, xSpeed, ySpeed, zSpeed);
             //p.setColor(1, 0, 1);
-            p.scale(4);
+            p.scale(2);
 
             return p;
         }

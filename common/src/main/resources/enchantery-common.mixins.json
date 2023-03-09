@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "BlockMixin",
     "EnchantmentMenuMixin",
     "EnchantmentTableBlockMixin",
     "ItemStackMixin",

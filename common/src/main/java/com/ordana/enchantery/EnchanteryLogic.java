@@ -48,7 +48,7 @@ public class EnchanteryLogic {
                 int currentDam = stack.getDamageValue();
                 int maxDam = stack.getMaxDamage();
                 if (currentDam > 0) {
-                    if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam -8);
+                    if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam - 8);
                     else stack.setDamageValue(maxDam);
                     entity.hurt(DamageSource.MAGIC, 1f);
                 }
@@ -70,6 +70,20 @@ public class EnchanteryLogic {
                 }
             }
         }
+    }
+
+    public static boolean devouringCurseLogic(Level level, ItemStack stack) {
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DEVOURING_CURSE.get(), stack);
+        if (f > 0 && level.random.nextBoolean()) {
+            int currentDam = stack.getDamageValue();
+            int maxDam = stack.getMaxDamage();
+            if (currentDam > 0) {
+                if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam - 8);
+                else stack.setDamageValue(maxDam);
+            }
+            return true;
+        }
+        else return false;
     }
 
 
@@ -122,7 +136,8 @@ public class EnchanteryLogic {
         int curses = malus.get() / 4;
         for (int i = 0; i < curses; i++) {
             //TODO add check for curse compatibilty (ie no binding on tools) + remove duplicate curses
-            list.add(new EnchantmentInstance(CURSES.get(random.nextInt(CURSES.size())), 1));
+            var curse = CURSES.get(random.nextInt(CURSES.size()));
+            if (curse.category.canEnchant(stack.getItem())) list.add(new EnchantmentInstance(curse, 1));
         }
 
         //remove curses
