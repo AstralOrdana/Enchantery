@@ -49,7 +49,7 @@ public class EnchanteryLogic {
                 int maxDam = stack.getMaxDamage();
                 if (currentDam > 0) {
                     if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam - 8);
-                    else stack.setDamageValue(maxDam);
+                    else stack.setDamageValue(0);
                     entity.hurt(DamageSource.MAGIC, 1f);
                 }
             }
@@ -76,10 +76,9 @@ public class EnchanteryLogic {
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DEVOURING_CURSE.get(), stack);
         if (f > 0 && level.random.nextBoolean()) {
             int currentDam = stack.getDamageValue();
-            int maxDam = stack.getMaxDamage();
             if (currentDam > 0) {
-                if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam - 8);
-                else stack.setDamageValue(maxDam);
+                stack.setDamageValue(currentDam - 1);
+                currentDam = stack.getDamageValue();
             }
             return true;
         }
