@@ -6,10 +6,13 @@
   "client": [
   ],
   "mixins": [
-    "ServerPlayerGamemodeMixin",
+    "AxeItemMixin",
+    "BowItemMixin",
     "EnchantmentMenuMixin",
     "EnchantmentTableBlockMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
+    "ServerPlayerGamemodeMixin",
     "SwordItemMixin",
     "enchantment_mixins.ArrowDamageEnchantmentMixin",
     "enchantment_mixins.ArrowFireEnchantmentMixin",

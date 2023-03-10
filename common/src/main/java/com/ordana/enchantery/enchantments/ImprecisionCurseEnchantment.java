@@ -6,9 +6,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.*;
 
-public class DevouringCurseEnchantment extends Enchantment {
-    public DevouringCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.DIGGER, equipmentSlots);
+public class ImprecisionCurseEnchantment extends Enchantment {
+    public ImprecisionCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
+        super(rarity, EnchantmentCategory.BOW, equipmentSlots);
     }
 
     public int getMinCost(int level) {
@@ -48,6 +48,6 @@ public class DevouringCurseEnchantment extends Enchantment {
     }
 
     public boolean checkCompatibility(Enchantment other) {
-        return !(other instanceof LootBonusEnchantment || other instanceof UntouchingEnchantment || other instanceof MendingEnchantment) && super.checkCompatibility(other);
+        return super.checkCompatibility(other);
     }
 }

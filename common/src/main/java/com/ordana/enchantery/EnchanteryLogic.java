@@ -15,8 +15,10 @@ import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -58,34 +60,37 @@ public class EnchanteryLogic {
         }
     }
 
-    public static void butterfingersCurseLogic(Level level, Entity entity, int inventorySlot, boolean isCurrentItem) {
-        ItemStack stack = entity.getSlot(inventorySlot).get();
+    public static void butterfingersCurseLogic(Entity entity, ItemStack stack) {
+        Level level = entity.level;
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.BUTTERFINGER_CURSE.get(), stack);
         if (level.isClientSide()) return;
 
         //Butterfingers Curse logic
-        if (level.random.nextInt(100) == 0) {
-            if (isCurrentItem) {
-                if (f > 0 && entity instanceof ServerPlayer player) {
-                    player.drop(true);
-                    player.connection.send(new ClientboundContainerSetSlotPacket(-2, 0, player.getInventory().selected, ItemStack.EMPTY));
-                }
+        if (level.random.nextBoolean()) {
+            if (f > 0 && entity instanceof ServerPlayer player) {
+                player.drop(true);
+                player.connection.send(new ClientboundContainerSetSlotPacket(-2, 0, player.getInventory().selected, ItemStack.EMPTY));
             }
         }
     }
 
-    public static boolean devouringCurseLogic(Player player,BlockState state, ItemStack stack) {
+    public static boolean devouringCurseLogic(Player player, BlockState state, ItemStack stack) {
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DEVOURING_CURSE.get(), stack);
-        if (f > 0 && player.level.random.nextBoolean()) {
+        if (f > 0 && player.level.random.nextInt(f + 1) > 0) {
             int currentDam = stack.getDamageValue();
             if (currentDam > 0) {
-                stack.setDamageValue(currentDam-1);
+                stack.setDamageValue(currentDam - (f / 2));
             }
             player.awardStat(Stats.BLOCK_MINED.get(state.getBlock()));
             player.causeFoodExhaustion(0.005F);
             return true;
         }
         else return false;
+    }
+
+    public static float imprecisionCurseLogic (ItemStack stack) {
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.IMPRECISION_CURSE.get(), stack);
+        return f * 2;
     }
 
 

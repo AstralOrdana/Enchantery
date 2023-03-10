@@ -23,7 +23,6 @@ public class ItemStackMixin {
     @Inject(method = "inventoryTick", at = @At(value = "HEAD"))
     public void inventoryTick(Level level, Entity entity, int inventorySlot, boolean isCurrentItem, CallbackInfo ci) {
         EnchanteryLogic.leechingCurseLogic(level, entity, inventorySlot);
-        EnchanteryLogic.butterfingersCurseLogic(level, entity, inventorySlot, isCurrentItem);
     }
 
     @ModifyVariable(

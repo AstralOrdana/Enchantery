@@ -43,6 +43,8 @@
     "enchantery:backbiting_curse",
     "enchantery:butterfinger_curse",
     "enchantery:leeching_curse",
-    "enchantery:devouring_curse"
+    "enchantery:devouring_curse",
+    "enchantery:imprecision_curse",
+    "enchantery:diffusion_curse"
   ]
 }
