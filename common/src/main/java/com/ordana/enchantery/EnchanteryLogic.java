@@ -10,6 +10,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
@@ -43,18 +44,18 @@ public class EnchanteryLogic {
 
     public static void leechingCurseLogic(Level level, Entity entity, int inventorySlot) {
         ItemStack stack = entity.getSlot(inventorySlot).get();
-        int g = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.LEECHING_CURSE.get(), stack);
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.LEECHING_CURSE.get(), stack);
         if (level.isClientSide()) return;
 
         //Leeching Curse logic
-        if (level.random.nextInt(100) == 0) {
-            if (g > 0) {
+        if (f > 0) {
+            if (level.random.nextInt(100 / f) == 0) {
                 int currentDam = stack.getDamageValue();
                 int maxDam = stack.getMaxDamage();
                 if (currentDam > 0) {
-                    if (currentDam <= (maxDam - 8)) stack.setDamageValue(currentDam - 8);
+                    if (currentDam <= (maxDam - (f * 2))) stack.setDamageValue(currentDam - (f * 2));
                     else stack.setDamageValue(0);
-                    entity.hurt(DamageSource.MAGIC, 1f);
+                    entity.hurt(DamageSource.MAGIC, f);
                 }
             }
         }
@@ -66,7 +67,7 @@ public class EnchanteryLogic {
         if (level.isClientSide()) return;
 
         //Butterfingers Curse logic
-        if (level.random.nextBoolean()) {
+        if (level.random.nextInt(4) < f) {
             if (f > 0 && entity instanceof ServerPlayer player) {
                 player.drop(true);
                 player.connection.send(new ClientboundContainerSetSlotPacket(-2, 0, player.getInventory().selected, ItemStack.EMPTY));
@@ -93,6 +94,13 @@ public class EnchanteryLogic {
         return f * 2;
     }
 
+    public static void kickbackCurseLogic (LivingEntity entity, ItemStack stack) {
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.KICKBACK_CURSE.get(), stack);
+        if (f > 0) {
+            var vec = entity.getViewVector(1);
+            entity.knockback(f, vec.x, vec.z);
+        }
+    }
 
 
     public static void modifyEnchantmentList(ContainerLevelAccess access, RandomSource random, ItemStack stack,

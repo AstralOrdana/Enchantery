@@ -34,6 +34,9 @@ public class ModEnchants {
     public static final Supplier<Enchantment> IMPRECISION_CURSE = RegHelper.registerEnchantment(
             Enchantery.res("imprecision_curse"), () -> new ImprecisionCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
 
+    public static final Supplier<Enchantment> KICKBACK_CURSE = RegHelper.registerEnchantment(
+            Enchantery.res("kickback_curse"), () -> new KickbackCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
+
     public static final Supplier<Enchantment> DIFFUSION_CURSE = RegHelper.registerEnchantment(
             Enchantery.res("diffusion_curse"), () -> new DiffusionCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
 

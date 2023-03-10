@@ -23,7 +23,7 @@ public class LeechingCurseEnchantment extends Enchantment {
     }
 
     public int getMaxLevel() {
-        return 1;
+        return 3;
     }
 
     public boolean canEnchant(ItemStack stack) {

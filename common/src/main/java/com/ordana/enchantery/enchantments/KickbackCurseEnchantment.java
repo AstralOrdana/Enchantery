@@ -3,13 +3,15 @@ package com.ordana.enchantery.enchantments;
 import com.ordana.enchantery.EnchanteryLogic;
 import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class ButterfingerCurseEnchantment extends Enchantment {
-    public ButterfingerCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
-        super(rarity, EnchantmentCategory.BREAKABLE, equipmentSlots);
+public class KickbackCurseEnchantment extends Enchantment {
+    public KickbackCurseEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {
+        super(rarity, EnchantmentCategory.BOW, equipmentSlots);
     }
 
     public int getMinCost(int level) {
@@ -25,7 +27,7 @@ public class ButterfingerCurseEnchantment extends Enchantment {
     }
 
     public boolean canEnchant(ItemStack stack) {
-        return super.canEnchant(stack);
+        return stack.getItem() instanceof CrossbowItem || super.canEnchant(stack);
     }
 
     @Override
@@ -48,4 +50,7 @@ public class ButterfingerCurseEnchantment extends Enchantment {
         return true;
     }
 
+    public boolean checkCompatibility(Enchantment other) {
+        return super.checkCompatibility(other);
+    }
 }

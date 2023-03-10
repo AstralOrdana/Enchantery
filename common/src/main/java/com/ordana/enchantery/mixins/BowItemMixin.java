@@ -27,6 +27,11 @@ public class BowItemMixin {
         bowStack = stack;
     }
 
+    @Inject(method = "releaseUsing", at = @At("TAIL"))
+    public void doKickback(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged, CallbackInfo ci) {
+        EnchanteryLogic.kickbackCurseLogic(livingEntity, stack);
+    }
+
     @ModifyArg(method = "releaseUsing", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/entity/projectile/AbstractArrow;shootFromRotation(Lnet/minecraft/world/entity/Entity;FFFFF)V"
     ), index = 5)

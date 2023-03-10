@@ -24,7 +24,7 @@ public class BackbitingCurseEnchantment extends Enchantment {
     }
 
     public int getMaxLevel() {
-        return 1;
+        return 3;
     }
 
     public boolean canEnchant(ItemStack stack) {
@@ -32,7 +32,7 @@ public class BackbitingCurseEnchantment extends Enchantment {
     }
 
     public float getDamageBonus(int level, MobType type) {
-        return 3f;
+        return level;
     }
 
     @Override

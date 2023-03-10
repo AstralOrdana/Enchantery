@@ -30,7 +30,7 @@ public class ItemStackMixin {
             at = @At(value = "HEAD"), index = 1, argsOnly = true)
     public int extraDamage(int amount) {
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.DIMINISHING_CURSE.get(), (ItemStack)(Object) this);
-        if (f > 0) amount = amount * 2;
+        if (f > 0) amount = amount + f;
         return amount;
     }
 }

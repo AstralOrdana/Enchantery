@@ -8,6 +8,7 @@
   "mixins": [
     "AxeItemMixin",
     "BowItemMixin",
+    "CrossbowItemMixin",
     "EnchantmentMenuMixin",
     "EnchantmentTableBlockMixin",
     "ItemStackMixin",
