@@ -28,6 +28,7 @@ public class ClientConfigs {
         builder.pop();
 
         CONFIG_SPEC = builder.buildAndRegister();
+        CONFIG_SPEC.loadFromFile();
     }
 
 }
