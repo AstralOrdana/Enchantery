@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:flame",
+    "minecraft:infinity",
+    "minecraft:lure",
+    "minecraft:frost_walker",
+    "minecraft:looting",
+    "minecraft:fortune",
+    "minecraft:luck_of_the_sea",
+    "minecraft:mending",
+    "minecraft:multishot",
+    "minecraft:respiration",
+    "minecraft:feather_falling",
+    "minecraft:thorns",
+    "minecraft:channeling",
+    "minecraft:riptide",
+    "minecraft:soul_speed",
+    "minecraft:swift_sneak"
+  ]
+}

@@ -21,6 +21,7 @@ public class ModTags {
     //enchants
     public static final TagKey<Enchantment> BASIC = registerEnchantTag("always_obtainable_from_enchanting_table");
     public static final TagKey<Enchantment> TRADEABLE = registerEnchantTag("only_obtainable_from_villager_trading");
+    public static final TagKey<Enchantment> TREASURE = registerEnchantTag("treasure");
 
     private ModTags() {
     }

@@ -141,7 +141,7 @@ public class EnchanteryLogic {
         for (var e : enchants.entrySet()) {
             Enchantment en = e.getKey();
             if (en.category.canEnchant(stack.getItem())) {
-                list.add(new EnchantmentInstance(en, random.nextInt(e.getValue() + (aguments.get() > 1 ? 1 : 0))));
+                list.add(new EnchantmentInstance(en, random.nextInt(1, e.getValue() + (aguments.get() > 1 ? 1 : 0))));
             }
         }
         //select single enchantment
@@ -194,7 +194,7 @@ public class EnchanteryLogic {
         @Nullable
         public static EnchantmentInfluencer get(BlockState state) {
             if (state.is(ModTags.ENCHANTMENT_AUGMENTS)) return AGUMENT;
-            if (state.is(ModTags.ENCHANTMENT_STABILIZERS)) return STABILIZER;
+            if (state.is(ModTags.ENCHANTMENT_STABILIZERS) && state.getBlock() instanceof CandleBlock && state.getValue(BlockStateProperties.LIT)) return STABILIZER;
             if (state.is(ModTags.CURSE_AUGMENTS)) return CURSE_AGUMENT;
             return null;
         }
