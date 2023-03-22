@@ -1,4 +1,4 @@
-package com.ordana.enchantery.mixins;
+package com.ordana.enchantery.mixins.fabric;
 
 import com.ordana.enchantery.EnchanteryLogic;
 import net.minecraft.core.BlockPos;
@@ -31,6 +31,7 @@ public class ServerPlayerGamemodeMixin {
                             ItemStack itemStack2, boolean bl2) {
 
         if(EnchanteryLogic.devouringCurseLogic(this.player, blockState, realStack)){
+            cir.setReturnValue(true);
             cir.cancel();
         }
     }

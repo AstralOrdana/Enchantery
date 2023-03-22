@@ -1,11 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.ordana.enchantery.mixins.fabric",
+  "package": "com.ordana.enchantery.mixins.forge",
   "compatibilityLevel": "JAVA_17",
   "client": [
   ],
   "mixins": [
+    "ServerPlayerGamemodeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
