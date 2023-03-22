@@ -24,7 +24,7 @@ public class EnchanteryClient {
     public static void addEnchantParticles(Level level, BlockPos pos, BlockPos target) {
         if (ClientConfigs.ENCHANTING_PARTICLES.get()) {
             var type = EnchanteryLogic.getInfluenceType(level, pos, target);
-            if(type != null) {
+            if (type != null) {
                 RandomSource random = level.random;
                 var particle = type.particle;
                 //if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
@@ -40,7 +40,6 @@ public class EnchanteryClient {
             }
         }
     }
-
 
 
 }

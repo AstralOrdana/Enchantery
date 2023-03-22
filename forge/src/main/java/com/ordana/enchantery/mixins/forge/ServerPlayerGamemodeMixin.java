@@ -26,8 +26,8 @@ public class ServerPlayerGamemodeMixin {
 
     @Inject(method = "destroyBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;playerDestroy(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/item/ItemStack;)V",
     shift =  At.Shift.BEFORE), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void deleteDrop(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState blockState,
-                            BlockEntity blockEntity, Block block, boolean bl, ItemStack realStack,
+    private void deleteDrop(BlockPos pos, CallbackInfoReturnable<Boolean> cir, BlockState blockState, int i,
+                            BlockEntity blockEntity, Block block, ItemStack realStack,
                             ItemStack itemStack2, boolean bl2, boolean b3) {
 
         if(EnchanteryLogic.devouringCurseLogic(this.player, blockState, realStack)){
