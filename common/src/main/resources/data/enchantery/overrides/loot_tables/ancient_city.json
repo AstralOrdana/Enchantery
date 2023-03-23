@@ -161,7 +161,9 @@
             {
               "function": "minecraft:enchant_randomly",
               "enchantments": [
-                "minecraft:swift_sneak"
+                "minecraft:swift_sneak",
+                "enchantery:soulbound",
+                "minecraft:mending"
               ]
             }
           ]

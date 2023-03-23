@@ -59,7 +59,8 @@
               "enchantments": [
                 "minecraft:silk_touch",
                 "minecraft:mending",
-                "minecraft:infinity"
+                "minecraft:infinity",
+                "enchantery:soulbound"
               ]
             }
           ]

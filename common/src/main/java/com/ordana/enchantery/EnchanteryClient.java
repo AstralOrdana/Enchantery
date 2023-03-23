@@ -10,7 +10,6 @@ import net.minecraft.world.level.Level;
 public class EnchanteryClient {
 
     public static void init() {
-        ClientConfigs.init();
         ClientPlatformHelper.addParticleRegistration(EnchanteryClient::registerParticles);
     }
 
@@ -22,22 +21,20 @@ public class EnchanteryClient {
     }
 
     public static void addEnchantParticles(Level level, BlockPos pos, BlockPos target) {
-        if (ClientConfigs.ENCHANTING_PARTICLES.get()) {
-            var type = EnchanteryLogic.getInfluenceType(level, pos, target);
-            if (type != null) {
-                RandomSource random = level.random;
-                var particle = type.particle;
-                //if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
-                level.addParticle(
-                        particle,
-                        pos.getX() + 0.5,
-                        pos.getY() + 2.0,
-                        pos.getZ() + 0.5,
-                        (target.getX() + random.nextFloat()) - 0.5,
-                        (target.getY() - random.nextFloat() - 1.0F),
-                        (target.getZ() + random.nextFloat()) - 0.5
-                );
-            }
+        var type = EnchanteryLogic.getInfluenceType(level, pos, target);
+        if (type != null) {
+            RandomSource random = level.random;
+            var particle = type.particle;
+            //if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
+            level.addParticle(
+                    particle,
+                    pos.getX() + 0.5,
+                    pos.getY() + 2.0,
+                    pos.getZ() + 0.5,
+                    (target.getX() + random.nextFloat()) - 0.5,
+                    (target.getY() - random.nextFloat() - 1.0F),
+                    (target.getZ() + random.nextFloat()) - 0.5
+            );
         }
     }
 

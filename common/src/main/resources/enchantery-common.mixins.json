@@ -14,6 +14,7 @@
     "EnchantmentTableBlockMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "ServerPlayerMixin",
     "SwordItemMixin",
     "VillagerTradesMixin"
   ],

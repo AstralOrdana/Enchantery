@@ -16,6 +16,7 @@
     "minecraft:channeling",
     "minecraft:riptide",
     "minecraft:soul_speed",
-    "minecraft:swift_sneak"
+    "minecraft:swift_sneak",
+    "enchantery:soulbound"
   ]
 }

@@ -62,7 +62,8 @@
             {
               "function": "minecraft:enchant_randomly",
               "enchantments": [
-                "minecraft:channeling"
+                "minecraft:channeling",
+                "enchantery:soulbound"
               ]
             }
           ]
