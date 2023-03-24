@@ -46,7 +46,7 @@ public class Enchantery {
             int maxDam = stack.getMaxDamage();
             int currentDam = stack.getDamageValue();
             int dam = maxDam - ((maxDam - currentDam) / 2);
-            stack.setDamageValue(dam);
+            stack.setDamageValue(dam - 1);
             event.setCanceled(true);
         }
     }

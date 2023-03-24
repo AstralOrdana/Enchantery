@@ -12,6 +12,9 @@ import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
 
+    //items
+    public static final TagKey<Item> CAN_BE_SOULBOUND = registerItemTag("can_be_soulbound");
+
     //blocks
     public static final TagKey<Block> MOB_HEADS = registerBlockTag("mob_heads");
     public static final TagKey<Block> ENCHANTMENT_STABILIZERS = registerBlockTag("enchantment_stabilizers");
@@ -24,6 +27,10 @@ public class ModTags {
     public static final TagKey<Enchantment> TREASURE = registerEnchantTag("treasure");
 
     private ModTags() {
+    }
+
+    private static TagKey<Item> registerItemTag(String id) {
+        return TagKey.create(Registry.ITEM_REGISTRY, Enchantery.res(id));
     }
 
     private static TagKey<Block> registerBlockTag(String id) {
