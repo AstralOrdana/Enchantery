@@ -25,7 +25,7 @@ public class SoulboundEnchantment extends Enchantment {
     }
 
     public boolean canEnchant(ItemStack stack) {
-        return super.canEnchant(stack);
+        return stack.is(ModTags.CAN_BE_SOULBOUND) || super.canEnchant(stack);
     }
 
     @Override
