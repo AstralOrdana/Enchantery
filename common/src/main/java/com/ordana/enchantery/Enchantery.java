@@ -4,16 +4,11 @@ import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.loot_modifiers.LootTableOverrides;
 import com.ordana.enchantery.reg.ModEnchants;
-import com.ordana.enchantery.reg.ModTags;
-import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
-import net.mehvahdjukaar.moonlight.api.events.MoonlightEventsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,15 +26,15 @@ public class Enchantery {
         ModEnchants.init();
 
         CommonConfigs.bump();
-        if(PlatformHelper.getEnv().isClient()){
+        if(PlatHelper.getPhysicalSide().isClient()){
             ClientConfigs.bump();
         }
 
-
-        MoonlightEventsHelper.addListener(Enchantery::soulboundLogic, IDropItemOnDeathEvent.class);
+        //MoonlightEventsHelper.addListener(Enchantery::compassLogic, IDropItemOnDeathEvent.class);
     }
 
-    private static void soulboundLogic(IDropItemOnDeathEvent event) {
+    /*
+    private static void compassLogic(IDropItemOnDeathEvent event) {
         ItemStack stack = event.getItemStack();
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.SOULBOUND.get(), stack);
         if (f > 0) {
@@ -50,6 +45,7 @@ public class Enchantery {
             event.setCanceled(true);
         }
     }
+     */
 
     public static void commonSetup(){
         EnchanteryLogic.setup();

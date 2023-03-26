@@ -1,14 +1,11 @@
 package com.ordana.enchantery.reg;
 
 import com.ordana.enchantery.Enchantery;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
 
@@ -30,14 +27,14 @@ public class ModTags {
     }
 
     private static TagKey<Item> registerItemTag(String id) {
-        return TagKey.create(Registry.ITEM_REGISTRY, Enchantery.res(id));
+        return TagKey.create(Registries.ITEM, Enchantery.res(id));
     }
 
     private static TagKey<Block> registerBlockTag(String id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, Enchantery.res(id));
+        return TagKey.create(Registries.BLOCK, Enchantery.res(id));
     }
 
     private static TagKey<Enchantment> registerEnchantTag(String id) {
-        return TagKey.create(Registry.ENCHANTMENT_REGISTRY, Enchantery.res(id));
+        return TagKey.create(Registries.ENCHANTMENT, Enchantery.res(id));
     }
 }

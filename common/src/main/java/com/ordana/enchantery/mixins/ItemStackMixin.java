@@ -7,6 +7,8 @@ import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -36,7 +38,7 @@ public class ItemStackMixin {
             for (int i = 0; i < storedEnchantments.size(); ++i) {
                 if (Screen.hasShiftDown()) {
                     CompoundTag compoundTag = storedEnchantments.getCompound(i);
-                    Registry.ENCHANTMENT.getOptional(EnchantmentHelper.getEnchantmentId(compoundTag)).ifPresent((enchantment) -> {
+                    BuiltInRegistries.ENCHANTMENT.getOptional(EnchantmentHelper.getEnchantmentId(compoundTag)).ifPresent((enchantment) -> {
 
                         if (EnchanteryLogic.getHolder(enchantment).is(ModTags.BASIC)) {
                             tooltipComponents.add(Component.translatable(enchantment.getDescriptionId()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)));
