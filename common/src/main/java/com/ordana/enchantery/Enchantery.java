@@ -4,11 +4,15 @@ import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.loot_modifiers.LootTableOverrides;
 import com.ordana.enchantery.reg.ModEnchants;
+import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
+import net.mehvahdjukaar.moonlight.api.events.MoonlightEventsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,22 +34,22 @@ public class Enchantery {
             ClientConfigs.bump();
         }
 
-        //MoonlightEventsHelper.addListener(Enchantery::compassLogic, IDropItemOnDeathEvent.class);
+        MoonlightEventsHelper.addListener(Enchantery::soulboundLogic, IDropItemOnDeathEvent.class);
     }
 
-    /*
-    private static void compassLogic(IDropItemOnDeathEvent event) {
+    private static void soulboundLogic(IDropItemOnDeathEvent event) {
         ItemStack stack = event.getItemStack();
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.SOULBOUND.get(), stack);
         if (f > 0) {
-            int maxDam = stack.getMaxDamage();
-            int currentDam = stack.getDamageValue();
-            int dam = maxDam - ((maxDam - currentDam) / 2);
-            stack.setDamageValue(dam - 1);
+            if(event.isBeforeDrop()) {
+                int maxDam = stack.getMaxDamage();
+                int currentDam = stack.getDamageValue();
+                int dam = maxDam - ((maxDam - currentDam) / 2);
+                stack.setDamageValue(dam - 1);
+            }
             event.setCanceled(true);
         }
     }
-     */
 
     public static void commonSetup(){
         EnchanteryLogic.setup();

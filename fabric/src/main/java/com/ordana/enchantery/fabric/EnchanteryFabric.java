@@ -6,7 +6,7 @@ import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.mehvahdjukaar.moonlight.fabric.FabricSetupCallbacks;
+import net.mehvahdjukaar.moonlight.fabric.MLFabricSetupCallbacks;
 
 public class EnchanteryFabric implements ModInitializer {
 
@@ -20,9 +20,9 @@ public class EnchanteryFabric implements ModInitializer {
         });
 
         if (PlatHelper.getPhysicalSide().isClient()) {
-            FabricSetupCallbacks.CLIENT_SETUP.add(EnchanteryClient::init);
+            MLFabricSetupCallbacks.CLIENT_SETUP.add(EnchanteryClient::init);
         }
 
-        FabricSetupCallbacks.COMMON_SETUP.add(Enchantery::commonSetup);
+        MLFabricSetupCallbacks.COMMON_SETUP.add(Enchantery::commonSetup);
     }
 }
