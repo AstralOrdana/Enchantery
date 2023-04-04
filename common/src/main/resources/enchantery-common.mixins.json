@@ -11,9 +11,12 @@
     "CrossbowItemMixin",
     "EnchantmentHelperMixin",
     "EnchantmentMenuMixin",
+    "EnchantmentTableBlockEntityMixin",
     "EnchantmentTableBlockMixin",
+    "ExperienceOrbMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "ServerPlayerMixin",
     "SwordItemMixin",
     "VillagerTradesMixin"
   ],

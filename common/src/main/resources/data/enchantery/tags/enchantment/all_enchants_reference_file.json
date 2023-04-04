@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:flame",
+    "minecraft:fire_aspect",
     "minecraft:infinity",
     "minecraft:punch",
     "minecraft:piercing",

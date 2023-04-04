@@ -2,6 +2,7 @@ package com.ordana.enchantery;
 
 import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.particles.RotatingEnchantingParticle;
+import com.ordana.enchantery.particles.RotatingEnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -10,7 +11,6 @@ import net.minecraft.world.level.Level;
 public class EnchanteryClient {
 
     public static void init() {
-        ClientConfigs.init();
         ClientPlatformHelper.addParticleRegistration(EnchanteryClient::registerParticles);
     }
 

@@ -9,26 +9,26 @@ import java.util.function.Supplier;
 
 public class ClientConfigs {
 
-    public static void init() {
-    }
+    public static final ConfigSpec CLIENT_SPEC;
 
-    public static final ConfigSpec CONFIG_SPEC;
-
-    public static final Supplier<Boolean> ENCHANTING_PARTICLES;
-    public static final Supplier<Integer> INTEGER_CONFIG;
+    public static final Supplier<Boolean> ENABLE_TOOLTIPS;
 
     static {
         ConfigBuilder builder = ConfigBuilder.create(Enchantery.res("client"), ConfigType.CLIENT);
 
         builder.push("general");
-        ENCHANTING_PARTICLES = builder.comment("Creates colored runes particles to show enchant affecting blocks")
-                .define("colored_runes", true);
+        ENABLE_TOOLTIPS = builder.comment("Enable Tooltips").define("enable_tooltips", true);
 
-        INTEGER_CONFIG = builder.comment("Integer Config Name").define("integer_config", 16, 8, 512);
         builder.pop();
 
-        CONFIG_SPEC = builder.buildAndRegister();
-        CONFIG_SPEC.loadFromFile();
+        CLIENT_SPEC = builder.buildAndRegister();
+
+        //load early
+        CLIENT_SPEC.loadFromFile();
+    }
+
+    public static void bump() {
+        // Literally just a way to ensure for the class to be loaded
     }
 
 }

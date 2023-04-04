@@ -1,8 +1,12 @@
 {
-  "tooltip.enchantery.basic": "%1$s is only obtainable via Enchantment Table",
-  "tooltip.enchantery.tradeable": "%1$s is only obtainable via Villager Trading",
-  "tooltip.enchantery.treasure": "%1$s is only obtainable via world loot",
+  "tooltip.enchantery.basic": " is only obtainable via Enchantment Table",
+  "tooltip.enchantery.tradeable": " is only obtainable via Villager Trading",
+  "tooltip.enchantery.treasure": " is only obtainable via world loot",
+  "tooltip.enchantery.untagged1": " has not been added to any enchant tags",
+  "tooltip.enchantery.untagged2": " and may be impossible to obtain,",
+  "tooltip.enchantery.untagged3": " contact modpack creator to resolve.",
 
+  "enchantment.enchantery.soulbound": "Soulbound",
   "enchantment.enchantery.diminishing_curse": "Curse of Diminishing",
   "enchantment.enchantery.backbiting_curse": "Curse of Backbiting",
   "enchantment.enchantery.butterfinger_curse": "Curse of Butterfingers",

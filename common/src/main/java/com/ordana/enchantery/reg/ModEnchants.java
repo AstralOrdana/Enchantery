@@ -16,6 +16,9 @@ public class ModEnchants {
     public static void init() {
     }
 
+    public static final Supplier<Enchantment> SOULBOUND = RegHelper.registerEnchantment(
+            Enchantery.res("soulbound"), () -> new SoulboundEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
+
     public static final Supplier<Enchantment> DIMINISHING_CURSE = RegHelper.registerEnchantment(
             Enchantery.res("diminishing_curse"), () -> new DiminishingCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
 
