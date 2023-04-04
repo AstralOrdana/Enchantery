@@ -31,8 +31,8 @@ public abstract class EnchantmentTableBlockMixin {
     }
 
     @ModifyArg(method = "animateTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/EnchantmentTableBlock;isValidBookShelf(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Z"))
-    private Level addCustomParticles(Level level, BlockPos pos, BlockPos target){
-        EnchanteryClient.addEnchantParticles(level, pos, target);
+    private Level addCustomParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos){
+        EnchanteryClient.addEnchantParticles(level, tablePos, bookShelfPos);
         return level;
     }
 

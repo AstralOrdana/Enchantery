@@ -1,7 +1,7 @@
 package com.ordana.enchantery;
 
 import com.ordana.enchantery.configs.ClientConfigs;
-import com.ordana.enchantery.particles.EnchantingParticle;
+import com.ordana.enchantery.particles.RotatingEnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -15,27 +15,27 @@ public class EnchanteryClient {
     }
 
     private static void registerParticles(ClientPlatformHelper.ParticleEvent event) {
-        event.register(Enchantery.COLORED_RUNE.get(), EnchantingParticle.ProviderAgument::new);
-        event.register(Enchantery.AMETHYST_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.STABILIZER_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.CURSE_PARTICLE.get(), EnchantingParticle.ProviderCurse::new);
+        event.register(Enchantery.COLORED_RUNE.get(), RotatingEnchantingParticle.ProviderAgument::new);
+        event.register(Enchantery.AMETHYST_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.STABILIZER_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.CURSE_PARTICLE.get(), RotatingEnchantingParticle.ProviderCurse::new);
     }
 
-    public static void addEnchantParticles(Level level, BlockPos pos, BlockPos target) {
+    public static void addEnchantParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos) {
         if (ClientConfigs.ENCHANTING_PARTICLES.get()) {
-            var type = EnchanteryLogic.getInfluenceType(level, pos, target);
+            var type = EnchanteryLogic.getInfluenceType(level, tablePos, bookShelfPos);
             if (type != null) {
                 RandomSource random = level.random;
                 var particle = type.particle;
-                //if (level.getBlockState(pos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
+                //if (level.getBlockState(tablePos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
                 level.addParticle(
-                        particle,
-                        pos.getX() + 0.5,
-                        pos.getY() + 2.0,
-                        pos.getZ() + 0.5,
-                        (target.getX() + random.nextFloat()) - 0.5,
-                        (target.getY() - random.nextFloat() - 1.0F),
-                        (target.getZ() + random.nextFloat()) - 0.5
+                        Enchantery.COLORED_RUNE.get(),
+                        tablePos.getX() + 0.5,
+                        tablePos.getY() + 2.0,
+                        tablePos.getZ() + 0.5,
+                        (bookShelfPos.getX() ) - 0.5,
+                        (bookShelfPos.getY() - 1.0F),
+                        (bookShelfPos.getZ()) - 0.5
                 );
             }
         }
