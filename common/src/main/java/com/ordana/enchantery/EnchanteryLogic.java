@@ -1,5 +1,6 @@
 package com.ordana.enchantery;
 
+import com.ordana.enchantery.access.EnchantmentTableBlockEntityAccess;
 import com.ordana.enchantery.reg.ModEnchants;
 import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.CandleBlock;
 import net.minecraft.world.level.block.EnchantmentTableBlock;
+import net.minecraft.world.level.block.entity.EnchantmentTableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
@@ -204,5 +206,10 @@ public class EnchanteryLogic {
     @SuppressWarnings("all")
     public static Holder<Enchantment> getHolder(Enchantment enchantment) {
         return Registry.ENCHANTMENT.getHolder(Registry.ENCHANTMENT.getId(enchantment)).get();
+    }
+
+    public static int getCharge(Level level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof EnchantmentTableBlockEntity) return ((EnchantmentTableBlockEntityAccess)level.getBlockEntity(pos)).getCharge();
+        else return 0;
     }
 }
