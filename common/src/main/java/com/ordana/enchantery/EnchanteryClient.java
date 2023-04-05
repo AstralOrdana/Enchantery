@@ -22,23 +22,23 @@ public class EnchanteryClient {
     }
 
     public static void addEnchantParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos) {
-        if (ClientConfigs.ENCHANTING_PARTICLES.get()) {
+        //if (ClientConfigs.ENCHANTING_PARTICLES.get()) {
             var type = EnchanteryLogic.getInfluenceType(level, tablePos, bookShelfPos);
             if (type != null) {
                 RandomSource random = level.random;
                 var particle = type.particle;
                 //if (level.getBlockState(tablePos).is(BlockTags.CANDLES)) particle = ParticleTypes.FLAME;
                 level.addParticle(
-                        Enchantery.COLORED_RUNE.get(),
+                        particle,
                         tablePos.getX() + 0.5,
                         tablePos.getY() + 2.0,
                         tablePos.getZ() + 0.5,
-                        (bookShelfPos.getX() ) - 0.5,
-                        (bookShelfPos.getY() - 1.0F),
-                        (bookShelfPos.getZ()) - 0.5
+                        bookShelfPos.getX(),
+                        bookShelfPos.getY() - 1,
+                        bookShelfPos.getZ()
                 );
             }
-        }
+        //}
     }
 
 
