@@ -4,11 +4,10 @@ import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.loot_modifiers.LootTableOverrides;
 import com.ordana.enchantery.reg.ModEnchants;
-import com.ordana.enchantery.reg.ModTags;
 import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
 import net.mehvahdjukaar.moonlight.api.events.MoonlightEventsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
@@ -31,10 +30,9 @@ public class Enchantery {
         ModEnchants.init();
 
         CommonConfigs.bump();
-        if(PlatformHelper.getEnv().isClient()){
+        if(PlatHelper.getPhysicalSide().isClient()){
             ClientConfigs.bump();
         }
-
 
         MoonlightEventsHelper.addListener(Enchantery::soulboundLogic, IDropItemOnDeathEvent.class);
     }
@@ -43,10 +41,12 @@ public class Enchantery {
         ItemStack stack = event.getItemStack();
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.SOULBOUND.get(), stack);
         if (f > 0) {
-            int maxDam = stack.getMaxDamage();
-            int currentDam = stack.getDamageValue();
-            int dam = maxDam - ((maxDam - currentDam) / 2);
-            stack.setDamageValue(dam - 1);
+            if(event.isBeforeDrop()) {
+                int maxDam = stack.getMaxDamage();
+                int currentDam = stack.getDamageValue();
+                int dam = maxDam - ((maxDam - currentDam) / 2);
+                stack.setDamageValue(dam - 1);
+            }
             event.setCanceled(true);
         }
     }

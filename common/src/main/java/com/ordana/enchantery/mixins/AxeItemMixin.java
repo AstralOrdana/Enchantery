@@ -23,6 +23,6 @@ public class AxeItemMixin {
     @Inject(method = "hurtEnemy", at = @At("HEAD"))
     public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
         int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.BACKBITING_CURSE.get(), stack);
-        if (f > 0) attacker.hurt(DamageSource.thorns(attacker), this.attackDamageBaseline / 2);
+        if (f > 0) attacker.hurt(target.level.damageSources().thorns(attacker), this.attackDamageBaseline / 2);
     }
 }

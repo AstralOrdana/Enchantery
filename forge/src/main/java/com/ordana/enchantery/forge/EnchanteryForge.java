@@ -3,7 +3,7 @@ package com.ordana.enchantery.forge;
 import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;
 import com.ordana.enchantery.loot_modifiers.LootTableInjects;
-import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +18,7 @@ public class EnchanteryForge {
     public EnchanteryForge() {
         Enchantery.commonInit();
 
-        if (PlatformHelper.getEnv().isClient()) {
+        if (PlatHelper.getPhysicalSide().isClient()) {
             EnchanteryClient.init();
         }
 

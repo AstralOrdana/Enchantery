@@ -6,21 +6,19 @@ import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -33,7 +31,6 @@ import net.minecraft.world.level.block.entity.EnchantmentTableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +54,7 @@ public class EnchanteryLogic {
                 if (currentDam > 0) {
                     if (currentDam <= (maxDam - (f * 2))) stack.setDamageValue(currentDam - (f * 2));
                     else stack.setDamageValue(0);
-                    entity.hurt(DamageSource.MAGIC, f);
+                    entity.hurt(level.damageSources().magic(), f);
                 }
             }
         }
@@ -167,7 +164,7 @@ public class EnchanteryLogic {
     private static final List<Enchantment> CURSES = new ArrayList<>();
 
     public static void setup() {
-        for (var v : Registry.ENCHANTMENT) {
+        for (var v : BuiltInRegistries.ENCHANTMENT) {
             if (v.isCurse()) CURSES.add(v);
         }
     }
@@ -205,7 +202,7 @@ public class EnchanteryLogic {
 
     @SuppressWarnings("all")
     public static Holder<Enchantment> getHolder(Enchantment enchantment) {
-        return Registry.ENCHANTMENT.getHolder(Registry.ENCHANTMENT.getId(enchantment)).get();
+        return BuiltInRegistries.ENCHANTMENT.getHolder(BuiltInRegistries.ENCHANTMENT.getId(enchantment)).get();
     }
 
     public static int getCharge(Level level, BlockPos pos) {

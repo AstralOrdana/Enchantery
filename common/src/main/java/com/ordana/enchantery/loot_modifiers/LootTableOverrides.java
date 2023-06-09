@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.ordana.enchantery.Enchantery;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesProvider;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.repository.Pack;
@@ -13,13 +13,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class LootTableOverrides extends DynServerResourcesProvider {
+public class LootTableOverrides extends DynServerResourcesGenerator {
 
     public static final LootTableOverrides INSTANCE = new LootTableOverrides();
 
     public LootTableOverrides() {
         super(new DynamicDataPack(Enchantery.res("generated_pack"), Pack.Position.TOP, true, true));
-        this.dynamicPack.generateDebugResources = true;
+        this.dynamicPack.setGenerateDebugResources(true);
         this.dynamicPack.addNamespaces("minecraft");
     }
 
