@@ -2,8 +2,11 @@ package com.ordana.enchantery.forge;
 
 import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;
+import com.ordana.enchantery.events.BookshelfNameRendererEvent;
 import com.ordana.enchantery.loot_modifiers.LootTableInjects;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,9 +35,18 @@ public class EnchanteryForge {
         event.enqueueWork(Enchantery::commonSetup);
     }
 
+    /*
     @SubscribeEvent
     public void onAddLootTables(LootTableLoadEvent event) {
         LootTableInjects.onLootInject(event.getLootTableManager(), event.getName(), (b) -> event.getTable().addPool(b.build()));
+    }
+     */
+
+    @SubscribeEvent
+    private static void onRenderLevel(RenderLevelStageEvent event){
+        if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES){
+            BookshelfNameRendererEvent.myFunc(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
+        }
     }
 }
 

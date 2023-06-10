@@ -1,7 +1,7 @@
 package com.ordana.enchantery;
 
 import com.ordana.enchantery.configs.ClientConfigs;
-import com.ordana.enchantery.particles.EnchantingParticle;
+import com.ordana.enchantery.particles.RotatingEnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -15,10 +15,10 @@ public class EnchanteryClient {
 
 
     private static void registerParticles(ClientHelper.ParticleEvent event) {
-        event.register(Enchantery.COLORED_RUNE.get(), EnchantingParticle.ProviderAgument::new);
-        event.register(Enchantery.AMETHYST_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.STABILIZER_PARTICLE.get(), EnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.CURSE_PARTICLE.get(), EnchantingParticle.ProviderCurse::new);
+        event.register(Enchantery.COLORED_RUNE.get(), RotatingEnchantingParticle.ProviderAgument::new);
+        event.register(Enchantery.AMETHYST_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.STABILIZER_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
+        event.register(Enchantery.CURSE_PARTICLE.get(), RotatingEnchantingParticle.ProviderCurse::new);
     }
 
     public static void addEnchantParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos) {
