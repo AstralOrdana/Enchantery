@@ -18,13 +18,6 @@ public class EnchanteryFabric implements ModInitializer {
 
         Enchantery.commonInit();
 
-        /*
-        LootTableEvents.MODIFY.register((m, t, r, b, s) -> {
-             LootTableInjects.onLootInject(t, r, b::withPool);
-        });
-
-         */
-
         if (PlatHelper.getPhysicalSide().isClient()) {
             MLFabricSetupCallbacks.CLIENT_SETUP.add(EnchanteryClient::init);
         }
@@ -32,7 +25,7 @@ public class EnchanteryFabric implements ModInitializer {
         MLFabricSetupCallbacks.COMMON_SETUP.add(Enchantery::commonSetup);
 
         WorldRenderEvents.AFTER_ENTITIES.register(context -> {
-            BookshelfNameRendererEvent.myFunc(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
+            BookshelfNameRendererEvent.renderBookName(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
         });
     }
 }

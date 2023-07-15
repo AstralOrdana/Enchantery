@@ -29,9 +29,9 @@ public class Enchantery {
         LootTableOverrides.INSTANCE.register();
         ModEnchants.init();
 
-        CommonConfigs.bump();
+        CommonConfigs.init();
         if(PlatHelper.getPhysicalSide().isClient()){
-            ClientConfigs.bump();
+            ClientConfigs.init();
         }
 
         MoonlightEventsHelper.addListener(Enchantery::soulboundLogic, IDropItemOnDeathEvent.class);

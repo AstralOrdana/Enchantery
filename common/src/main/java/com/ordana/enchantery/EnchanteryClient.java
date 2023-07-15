@@ -1,6 +1,5 @@
 package com.ordana.enchantery;
 
-import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.particles.RotatingEnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.core.BlockPos;
@@ -12,8 +11,6 @@ public class EnchanteryClient {
     public static void init() {
         ClientHelper.addParticleRegistration(EnchanteryClient::registerParticles);
     }
-
-
     private static void registerParticles(ClientHelper.ParticleEvent event) {
         event.register(Enchantery.COLORED_RUNE.get(), RotatingEnchantingParticle.ProviderAgument::new);
         event.register(Enchantery.AMETHYST_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);

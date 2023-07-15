@@ -21,8 +21,6 @@ public class LootTableInjects {
                 "nether_bridge",
                 "ruined_portal"
         );
-
-
         for (var table : lootChestInjects) {
             if (name.equals(new ResourceLocation("minecraft", "chests/" + table))) {
                 {

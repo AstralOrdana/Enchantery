@@ -60,6 +60,8 @@ public abstract class EnchantmentTableBlockMixin extends BaseEntityBlock {
         return level;
     }
 
+
+    /* WIP + commented out for blanketcon
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 
     @Override
@@ -94,5 +96,6 @@ public abstract class EnchantmentTableBlockMixin extends BaseEntityBlock {
         }
         super.playerWillDestroy(level, pos, state, player);
     }
+     */
 
 }

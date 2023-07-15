@@ -6,6 +6,7 @@ import com.ordana.enchantery.events.BookshelfNameRendererEvent;
 import com.ordana.enchantery.loot_modifiers.LootTableInjects;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -27,7 +28,6 @@ public class EnchanteryForge {
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -44,8 +44,8 @@ public class EnchanteryForge {
 
     @SubscribeEvent
     private static void onRenderLevel(RenderLevelStageEvent event){
-        if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES){
-            BookshelfNameRendererEvent.myFunc(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
+        if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
+            BookshelfNameRendererEvent.renderBookName(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
         }
     }
 }

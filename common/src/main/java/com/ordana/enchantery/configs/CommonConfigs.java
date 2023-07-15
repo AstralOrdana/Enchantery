@@ -10,16 +10,21 @@ import java.util.function.Supplier;
 
 public class CommonConfigs {
 
-    public static final ConfigSpec SERVER_SPEC;
+    public static ConfigSpec SERVER_SPEC;
 
-    public static final Supplier<Boolean> SOULBOUND_MENDING_COMPAT;
-    static {
+    public static Supplier<Boolean> SOULBOUND_MENDING_COMPAT;
+    public static Supplier<Boolean> DISABLE_ANVIL_ENCHANTING;
+    public static Supplier<Boolean> DISABLE_ANVIL_COST;
+
+    public static void init() {
         ConfigBuilder builder = ConfigBuilder.create(Enchantery.res("common"), ConfigType.COMMON);
 
         builder.setSynced();
 
         builder.push("misc");
         SOULBOUND_MENDING_COMPAT = builder.define("soulbound_mending_compat", false);
+        DISABLE_ANVIL_ENCHANTING = builder.define("disable_anvil_enchanting", true);
+        DISABLE_ANVIL_COST = builder.define("disable_anvil_cost", true);
         builder.pop();
 
         //fabric specific
@@ -30,9 +35,5 @@ public class CommonConfigs {
 
         SERVER_SPEC = builder.buildAndRegister();
         SERVER_SPEC.loadFromFile();
-    }
-
-    public static void bump() {
-        // Literally just a way to ensure for the class to be loaded
     }
 }

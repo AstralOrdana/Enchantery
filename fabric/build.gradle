@@ -23,7 +23,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-    modImplementation("curse.maven:selene-499980:4573499")
+    modImplementation("curse.maven:selene-499980:4602951")
 
     modImplementation("curse.maven:yacl-667299:4574163")
 
@@ -102,7 +102,6 @@ publishing {
                 includeGroup "maven.modrinth"
             }
         }
-
     }
 }
 

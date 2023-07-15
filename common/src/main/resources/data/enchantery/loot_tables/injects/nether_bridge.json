@@ -19,12 +19,6 @@
                     "minecraft:soul_speed"
                   ]
                 }
-              ],
-              "conditions": [
-                {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.25
-                }
               ]
             }
           ]

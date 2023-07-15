@@ -6,12 +6,13 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import com.ordana.enchantery.configs.ClientConfigs;
 import net.mehvahdjukaar.moonlight.api.platform.configs.fabric.FabricConfigListScreen;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
+
+import java.awt.*;
 
 public class ModMenuCompat implements ModMenuApi {
 

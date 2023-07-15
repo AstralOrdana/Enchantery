@@ -1,18 +1,29 @@
 package com.ordana.enchantery.events;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import com.ordana.enchantery.configs.ClientConfigs;
+import com.ordana.enchantery.configs.CommonConfigs;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.WrittenBookItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChiseledBookShelfBlock;
-import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.entity.ChiseledBookShelfBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -20,6 +31,8 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class BookshelfNameRendererEvent {
@@ -48,7 +61,7 @@ public class BookshelfNameRendererEvent {
             return Optional.empty();
         } else {
             BlockPos blockPos = hitResult.getBlockPos().relative(direction);
-            Vec3 vec3 = hitResult.getLocation().subtract((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ());
+            Vec3 vec3 = hitResult.getLocation().subtract(blockPos.getX(), blockPos.getY(), blockPos.getZ());
             double d = vec3.x();
             double e = vec3.y();
             double f = vec3.z();
@@ -64,95 +77,110 @@ public class BookshelfNameRendererEvent {
             return var10000;
         }
     }
-    public static void myFunc(Level level, HitResult blockHit) {
-        if (blockHit instanceof BlockHitResult hit) {
-            BlockState state = level.getBlockState(hit.getBlockPos());
-            BlockPos pos = hit.getBlockPos();
-            if (level.getBlockState(hit.getBlockPos()).getBlock() instanceof GlassBlock) {
 
+    public static List<Component> bookText(ItemStack stack) {
+        List<Component> listText = new ArrayList<>();
+        listText.add(stack.getDisplayName());
+        if (stack.getItem() instanceof EnchantedBookItem book) {
+            ListTag storedEnchantments = book.getEnchantments(stack);
+            for (int j = 0; j < storedEnchantments.size(); ++j) {
+                CompoundTag compoundTag = storedEnchantments.getCompound(j);
+                BuiltInRegistries.ENCHANTMENT.getOptional(EnchantmentHelper.getEnchantmentId(compoundTag)).ifPresent((enchantment) -> {
 
-                MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-                renderNameTag(new Vec3(pos.getX(), pos.getY(), pos.getZ()),
-                        Component.literal("pisspisspisspiss"),
-                        new PoseStack(), bufferSource, level.getLightEmission(pos));
+                    if (enchantment.isCurse()) listText.add(Component.translatable(enchantment.getDescriptionId()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.RED)));
+                    else listText.add(Component.translatable(enchantment.getDescriptionId()).setStyle(Style.EMPTY.applyFormat(ChatFormatting.WHITE)));
 
-
-                bufferSource.endBatch();
-
+                });
             }
         }
+        return listText;
     }
 
-
-    /*
-    public static void myFunc(Level level, HitResult blockHit) {
+    public static void renderBookName(Level level, HitResult blockHit) {
         if (blockHit instanceof BlockHitResult hit) {
-            BlockState state = level.getBlockState(hit.getBlockPos());
             BlockPos pos = hit.getBlockPos();
-            if (level.getBlockState(hit.getBlockPos()).getBlock() instanceof ChiseledBookShelfBlock bookshelf && level.getBlockEntity(pos) instanceof ChiseledBookShelfBlockEntity bookshelfEntity) {
+            if (ClientConfigs.BOOKSHELF_LABELS_SHIFT.get()) {
+                if (!Screen.hasShiftDown()) return;
+            }
 
-
+            if (level.getBlockState(hit.getBlockPos()).getBlock() instanceof ChiseledBookShelfBlock && level.getBlockEntity(pos) instanceof Container bookshelfEntity) {
+                BlockState state = level.getBlockState(hit.getBlockPos());
                 Optional<Vec2> optional = getRelativeHitCoordinatesForBlockFace(hit, state.getValue(HorizontalDirectionalBlock.FACING));
+
                 if (optional.isPresent()) {
+                    int i = getHitSlot(optional.get());
 
-                    Component name = bookshelfEntity.getItem(getHitSlot(optional.get())).getHoverName();
+                    if (state.getValue(ChiseledBookShelfBlock.SLOT_OCCUPIED_PROPERTIES.get(i))) {
+                        MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+                        PoseStack matrixStack = new PoseStack();
+                        matrixStack.mulPose(Axis.XP.rotationDegrees(Minecraft.getInstance().getEntityRenderDispatcher().camera.getXRot()));
+                        matrixStack.mulPose(Axis.YP.rotationDegrees(Minecraft.getInstance().getEntityRenderDispatcher().camera.getYRot() + 180.0f));
+                        ItemStack stack = bookshelfEntity.getItem(i);
 
-                if (bookshelfEntity.getItem(getHitSlot(optional.get())).getItem() instanceof EnchantedBookItem book) {
 
-                    ListTag storedEnchantments = new ItemStack(book).getEnchantmentTags();
+                        if (Minecraft.renderNames() && (stack.hasCustomHoverName() || stack.getItem() instanceof EnchantedBookItem || stack.getItem() instanceof WrittenBookItem)) {
 
-                    for (int i = 0; i < storedEnchantments.size(); ++i) {
-                        if (Screen.hasShiftDown()) {
-                            CompoundTag compoundTag = storedEnchantments.getCompound(i);
-                            BuiltInRegistries.ENCHANTMENT.getOptional(EnchantmentHelper.getEnchantmentId(compoundTag)).ifPresent((enchantment) -> {
+                            List<Component> listText = bookText(stack);
 
-                                name = Component.literal(enchantment.getDescriptionId());
 
-                            });
+                                renderNameTag(stack, i, hit.getDirection(),
+                                        new Vec3(pos.getX(), pos.getY(), pos.getZ()),
+                                        listText,
+                                        matrixStack, bufferSource, level.getLightEmission(pos));
+
+
+
+                            bufferSource.endBatch();
                         }
                     }
                 }
-                    name = Component.literal("piss");
-
-                    MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-                    renderNameTag(new Vec3(pos.getX(), pos.getY(), pos.getZ()),
-                            name,
-                            new PoseStack(), bufferSource, level.getLightEmission(pos));
-
-
-                    bufferSource.endBatch();
-                }
             }
         }
     }
-    */
 
-    protected static void renderNameTag(Vec3 pos, Component displayName, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
 
+    protected static void renderNameTag(ItemStack stack, int slot, Direction dir, Vec3 pos, List<Component> listText, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
         double d = Minecraft.getInstance().getEntityRenderDispatcher().distanceToSqr(pos.x, pos.y, pos.z);
 
-        if (!(d > 4096.0D)) {
-            //boolean bl = !entity.isDiscrete();
-            float f = 0.2f; //entity.getNameTagOffsetY();
-            int i = "deadmau5".equals(displayName.getString()) ? -10 : 0;
-            matrixStack.pushPose();
-            matrixStack.translate(0.0F, f, 0.0F);
-            //matrixStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-            matrixStack.scale(-0.025F, -0.025F, 0.025F);
+        var cameraPos = Minecraft.getInstance().getEntityRenderDispatcher().camera.getPosition();
+        matrixStack.translate(pos.x - cameraPos.x, pos.y - cameraPos.y, pos.z - cameraPos.z);
 
-            //var cameraPos = Minecraft.getInstance().cameraEntity;
-            //matrixStack.translate(pos.x - cameraPos.getX(), pos.y - cameraPos.getY(), pos.z - cameraPos.getZ());
-
-            Matrix4f matrix4f = matrixStack.last().pose();
-            float g = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
-            int j = (int)(g * 255.0F) << 24;
-            Font font = Minecraft.getInstance().font;
-            float h = (float)(-font.width(displayName) / 2);
-            font.drawInBatch(displayName, h, (float)i, 553648127, false, matrix4f, buffer, Font.DisplayMode.NORMAL, j, packedLight);
-            font.drawInBatch(displayName, h, (float)i, -1, false, matrix4f, buffer, Font.DisplayMode.NORMAL, 0, packedLight);
-
-
-            matrixStack.popPose();
+        if (d > 4096.0) {
+            return;
         }
+
+        matrixStack.pushPose();
+
+        ///
+
+        matrixStack.translate(0.5f + (dir.getNormal().getX() / 1.3f), 1.2f, 0.5f + (dir.getNormal().getZ() / 1.3f));
+
+        //book positioner
+        switch (slot) {
+            case 0 -> matrixStack.translate((dir.getNormal().getZ() * -0.3), 0, (dir.getNormal().getX() * 0.3));
+            case 1 -> matrixStack.translate(0, 0, 0);
+            case 2 -> matrixStack.translate((dir.getNormal().getZ() * 0.3), 0, (dir.getNormal().getX() * -0.3));
+            case 3 -> matrixStack.translate((dir.getNormal().getZ() * -0.3), -0.5, (dir.getNormal().getX() * 0.3));
+            case 4 -> matrixStack.translate(0, -0.5, 0);
+            case 5 -> matrixStack.translate((dir.getNormal().getZ() * 0.3), -0.5, (dir.getNormal().getX() * -0.3));
+            default -> matrixStack.translate(0, 0, 0);
+        };
+
+        matrixStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        matrixStack.scale(-0.025f, -0.025f, 0.025f);
+        Matrix4f matrix4f = matrixStack.last().pose();
+        float g = Minecraft.getInstance().options.getBackgroundOpacity(0.25f);
+        int j = (int)(g * 255.0f) << 24;
+        Font font = Minecraft.getInstance().font;
+
+        float y = 0;
+        for (Component text : listText) {
+            float h = (float)(-font.width(text)) / 2;
+            font.drawInBatch(text, h, y, ChatFormatting.WHITE.getId(), false, matrix4f, buffer, Font.DisplayMode.NORMAL, j, 15728880);
+            y += 10f;
+        }
+
+        matrixStack.popPose();
+
     }
 }

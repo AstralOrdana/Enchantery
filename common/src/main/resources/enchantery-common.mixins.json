@@ -6,14 +6,16 @@
   "client": [
   ],
   "mixins": [
+    "AnvilMixin",
     "AxeItemMixin",
     "BowItemMixin",
+    "ChiseledBookshelfMixin",
     "CrossbowItemMixin",
     "EnchantmentHelperMixin",
     "EnchantmentMenuMixin",
-    "EnchantmentTableBlockEntityMixin",
     "EnchantmentTableBlockMixin",
     "ExperienceOrbMixin",
+    "ItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
     "ServerPlayerMixin",

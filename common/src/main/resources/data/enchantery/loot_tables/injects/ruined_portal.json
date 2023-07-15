@@ -18,12 +18,6 @@
                     "minecraft:fire_aspect"
                   ]
                 }
-              ],
-              "conditions": [
-                {
-                  "condition": "minecraft:random_chance",
-                  "chance": 0.25
-                }
               ]
             }
           ]
