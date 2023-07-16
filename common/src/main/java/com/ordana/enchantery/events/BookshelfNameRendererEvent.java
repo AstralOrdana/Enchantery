@@ -1,5 +1,6 @@
 package com.ordana.enchantery.events;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.ordana.enchantery.configs.ClientConfigs;
@@ -100,7 +101,7 @@ public class BookshelfNameRendererEvent {
         if (blockHit instanceof BlockHitResult hit) {
             BlockPos pos = hit.getBlockPos();
             if (ClientConfigs.BOOKSHELF_LABELS_SHIFT.get()) {
-                if (!Screen.hasShiftDown()) return;
+                if (!InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), Minecraft.getInstance().options.keyShift.key.getValue())) return;
             }
 
             if (level.getBlockState(hit.getBlockPos()).getBlock() instanceof ChiseledBookShelfBlock && level.getBlockEntity(pos) instanceof Container bookshelfEntity) {
