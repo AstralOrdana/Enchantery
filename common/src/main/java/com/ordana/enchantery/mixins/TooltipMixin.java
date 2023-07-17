@@ -30,7 +30,7 @@ public class TooltipMixin {
     @Inject(method = "appendEnchantmentNames", at = @At(value = "TAIL"))
     private static void enchantmentTooltips(List<Component> tooltipComponents, ListTag storedEnchantments, CallbackInfo ci) {
 
-        if (ClientConfigs.ENABLE_TOOLTIPS.get() || storedEnchantments.size() < 1) {
+        if (!ClientConfigs.ENABLE_TOOLTIPS.get() || storedEnchantments.size() < 1) {
             return;
         }
 
