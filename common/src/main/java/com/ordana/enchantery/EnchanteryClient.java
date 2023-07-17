@@ -1,12 +1,18 @@
 package com.ordana.enchantery;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.ordana.enchantery.particles.RotatingEnchantingParticle;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 
 public class EnchanteryClient {
+
+    public static boolean isShiftDown() {
+        return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), Minecraft.getInstance().options.keyShift.key.getValue());
+    }
 
     public static void init() {
         ClientHelper.addParticleRegistration(EnchanteryClient::registerParticles);
