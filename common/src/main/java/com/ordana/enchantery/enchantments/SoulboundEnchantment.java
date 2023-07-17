@@ -5,7 +5,9 @@ import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.MendingEnchantment;
 
 public class SoulboundEnchantment extends Enchantment {
     public SoulboundEnchantment(Rarity rarity, EquipmentSlot... equipmentSlots) {

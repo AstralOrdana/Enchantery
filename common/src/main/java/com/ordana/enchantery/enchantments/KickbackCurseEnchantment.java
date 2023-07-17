@@ -3,7 +3,6 @@ package com.ordana.enchantery.enchantments;
 import com.ordana.enchantery.EnchanteryLogic;
 import com.ordana.enchantery.reg.ModTags;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;

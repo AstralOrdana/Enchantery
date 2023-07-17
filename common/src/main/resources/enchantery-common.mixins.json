@@ -16,10 +16,10 @@
     "EnchantmentTableBlockMixin",
     "ExperienceOrbMixin",
     "ItemMixin",
-    "ItemStackMixin",
     "LivingEntityMixin",
     "ServerPlayerMixin",
     "SwordItemMixin",
+    "TooltipMixin",
     "VillagerTradesMixin"
   ],
   "injectors": {

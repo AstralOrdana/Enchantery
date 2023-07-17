@@ -1,7 +1,5 @@
 package com.ordana.enchantery.particles;
 
-import io.netty.util.internal.MathUtil;
-import net.minecraft.Util;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;

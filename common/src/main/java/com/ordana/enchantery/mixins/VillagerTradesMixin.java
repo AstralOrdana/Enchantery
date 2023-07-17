@@ -2,7 +2,6 @@ package com.ordana.enchantery.mixins;
 
 import com.ordana.enchantery.EnchanteryLogic;
 import com.ordana.enchantery.reg.ModTags;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import org.spongepowered.asm.mixin.Mixin;
