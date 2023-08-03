@@ -34,22 +34,9 @@ public class Enchantery {
             ClientConfigs.init();
         }
 
-        MoonlightEventsHelper.addListener(Enchantery::soulboundLogic, IDropItemOnDeathEvent.class);
+        MoonlightEventsHelper.addListener(EnchanteryLogic::soulboundLogic, IDropItemOnDeathEvent.class);
     }
 
-    private static void soulboundLogic(IDropItemOnDeathEvent event) {
-        ItemStack stack = event.getItemStack();
-        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.SOULBOUND.get(), stack);
-        if (f > 0) {
-            if(event.isBeforeDrop()) {
-                int maxDam = stack.getMaxDamage();
-                int currentDam = stack.getDamageValue();
-                int dam = maxDam - ((maxDam - currentDam) / 2);
-                stack.setDamageValue(dam - 1);
-            }
-            event.setCanceled(true);
-        }
-    }
 
     public static void commonSetup(){
         EnchanteryLogic.setup();

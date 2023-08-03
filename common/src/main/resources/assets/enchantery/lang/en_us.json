@@ -14,5 +14,15 @@
   "enchantment.enchantery.devouring_curse": "Curse of Devouring",
   "enchantment.enchantery.imprecision_curse": "Curse of Imprecision",
   "enchantment.enchantery.diffusion_curse": "Curse of Diffusion",
-  "enchantment.enchantery.kickback_curse": "Curse of Kickback"
+  "enchantment.enchantery.kickback_curse": "Curse of Kickback",
+
+  "enchantment.enchantery.soulbound.desc": "Items with this enchant stay in your inventory after death at the cost of half their current durability.",
+  "enchantment.enchantery.diminishing_curse.desc": "Damage to durability is multiplied by curse level.",
+  "enchantment.enchantery.backbiting_curse.desc": "Weapon damage is increased but half the total damage is dealt back to you.",
+  "enchantment.enchantery.butterfinger_curse.desc": "Held items have a chance to drop to the ground when damage is taken.",
+  "enchantment.enchantery.leeching_curse.desc": "Item will repair themselves at the cost of your own life.",
+  "enchantment.enchantery.devouring_curse.desc": "Blocks mined are occasionally consumed by the tool to repair itself.",
+  "enchantment.enchantery.imprecision_curse.desc": "Arrows shot will be inaccurate.",
+  "enchantment.enchantery.diffusion_curse.desc": "Potion effects applied to you will be copied to those hit by your attacks",
+  "enchantment.enchantery.kickback_curse.desc": "Shooting arrows will propel you backward."
 }

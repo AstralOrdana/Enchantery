@@ -3,6 +3,7 @@ package com.ordana.enchantery;
 import com.ordana.enchantery.access.EnchantmentTableBlockEntityAccess;
 import com.ordana.enchantery.reg.ModEnchants;
 import com.ordana.enchantery.reg.ModTags;
+import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -99,6 +100,20 @@ public class EnchanteryLogic {
         }
     }
 
+    public static void soulboundLogic(IDropItemOnDeathEvent event) {
+        ItemStack stack = event.getItemStack();
+        int f = EnchantmentHelper.getItemEnchantmentLevel(ModEnchants.SOULBOUND.get(), stack);
+        if (f > 0) {
+            if(event.isBeforeDrop()) {
+                int maxDam = stack.getMaxDamage();
+                int currentDam = stack.getDamageValue();
+                int dam = maxDam - ((maxDam - currentDam) / 2);
+                stack.setDamageValue(dam - 1);
+            }
+            event.setCanceled(true);
+        }
+    }
+
 
     public static void modifyEnchantmentList(ContainerLevelAccess access, RandomSource random, ItemStack stack,
                                              List<EnchantmentInstance> list) {
@@ -137,7 +152,7 @@ public class EnchanteryLogic {
 
         for (var e : enchants.entrySet()) {
             Enchantment en = e.getKey();
-            if (en.category.canEnchant(stack.getItem())) {
+            if (en.category.canEnchant(stack.getItem()) && !EnchanteryLogic.getHolder(en).is(ModTags.EXEMPT)) {
                 list.add(new EnchantmentInstance(en, random.nextInt(1, e.getValue() + (aguments.get() > 1 ? 1 : 0))));
             }
         }

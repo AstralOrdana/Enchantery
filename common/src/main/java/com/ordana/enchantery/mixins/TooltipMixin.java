@@ -46,6 +46,8 @@ public class TooltipMixin {
                 var holder = EnchanteryLogic.getHolder(enchantment);
                 var desc = enchantment.getDescriptionId();
 
+                if (holder.is(ModTags.EXEMPT)) return;
+
                 if (holder.is(ModTags.BASIC)) {
                     tooltipComponents.add(Component.translatable(desc).setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)));
                     tooltipComponents.add(Component.translatable("tooltip.enchantery.basic").setStyle(Style.EMPTY.applyFormat(ChatFormatting.DARK_PURPLE)));
