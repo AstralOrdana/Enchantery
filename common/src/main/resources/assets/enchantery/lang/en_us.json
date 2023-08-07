@@ -5,6 +5,7 @@
   "tooltip.enchantery.untagged1": " has not been added to any enchant tags",
   "tooltip.enchantery.untagged2": " and may be impossible to obtain,",
   "tooltip.enchantery.untagged3": " contact modpack creator to resolve.",
+  "tooltip.enchantery.exempt": " is exempt from Enchantery features",
 
   "enchantment.enchantery.soulbound": "Soulbound",
   "enchantment.enchantery.diminishing_curse": "Curse of Diminishing",

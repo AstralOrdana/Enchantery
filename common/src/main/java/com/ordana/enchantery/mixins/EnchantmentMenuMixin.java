@@ -56,15 +56,4 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
     }
 
 
-    @Inject(method = "clickMenuButton",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/ItemStack;getCount()I",
-                    shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void internalXp(Player player, int id, CallbackInfoReturnable<Boolean> cir, ItemStack itemStack, ItemStack itemStack2, int i) {
-        access.evaluate((level, pos) ->
-                EnchanteryLogic.getCharge(level, pos)
-        );
-
-    }
-
 }
