@@ -127,9 +127,7 @@ public class EnchanteryLogic {
             for (BlockPos offset : EnchantmentTableBlock.BOOKSHELF_OFFSETS) {
                 BlockPos target = offset.offset(blockPos);
                 BlockState targetState = level.getBlockState(target);
-                if (targetState.is(ModTags.ENCHANTMENT_AUGMENTS)) {
-                    aguments.getAndAdd(1);
-                } else if (targetState.is(ModTags.CURSE_AUGMENTS)) {
+                if (targetState.is(ModTags.CURSE_AUGMENTS)) {
                     malus.set(malus.get() + 1);
                 } else if (targetState.is(ModTags.ENCHANTMENT_STABILIZERS)) {
                     if (targetState.getBlock() instanceof CandleBlock && targetState.getValue(BlockStateProperties.LIT)) {
@@ -153,7 +151,7 @@ public class EnchanteryLogic {
         for (var e : enchants.entrySet()) {
             Enchantment en = e.getKey();
             if (en.category.canEnchant(stack.getItem()) && !EnchanteryLogic.getHolder(en).is(ModTags.EXEMPT)) {
-                list.add(new EnchantmentInstance(en, random.nextInt(1, e.getValue() + (aguments.get() > 1 ? 1 : 0))));
+                list.add(new EnchantmentInstance(en, Math.max(1, random.nextInt(e.getValue()))));
             }
         }
         //select single enchantment
