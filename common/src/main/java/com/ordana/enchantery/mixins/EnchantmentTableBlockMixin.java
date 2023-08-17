@@ -2,9 +2,12 @@ package com.ordana.enchantery.mixins;
 
 import com.ordana.enchantery.EnchanteryClient;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.EnchantmentTableBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -13,7 +16,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Mixin(EnchantmentTableBlock.class)
@@ -34,10 +39,11 @@ public abstract class EnchantmentTableBlockMixin extends BaseEntityBlock {
                 -> Math.abs(blockPos.getX()) <= 3 || Math.abs(blockPos.getZ()) <= 3).map(BlockPos::immutable).toList();
     }
 
-    @ModifyArg(method = "animateTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/EnchantmentTableBlock;isValidBookShelf(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/BlockPos;)Z"))
-    private Level addCustomParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos){
+    @Inject(method = "animateTick", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/util/RandomSource;nextInt(I)I",
+            shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
+    private void addCustomParticles(BlockState state, Level level, BlockPos tablePos, RandomSource random, CallbackInfo ci, Iterator var5, BlockPos bookShelfPos){
         EnchanteryClient.addEnchantParticles(level, tablePos, bookShelfPos);
-        return level;
     }
 
 

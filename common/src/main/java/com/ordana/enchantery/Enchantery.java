@@ -11,8 +11,6 @@ import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,8 +40,6 @@ public class Enchantery {
         EnchanteryLogic.setup();
     }
 
-    public static final RegSupplier<SimpleParticleType> COLORED_RUNE = RegHelper.registerParticle(res("colored_rune"));
-    public static final RegSupplier<SimpleParticleType> AMETHYST_PARTICLE = RegHelper.registerParticle(res("amethyst_particle"));
     public static final RegSupplier<SimpleParticleType> CURSE_PARTICLE = RegHelper.registerParticle(res("curse_particle"));
     public static final RegSupplier<SimpleParticleType> STABILIZER_PARTICLE = RegHelper.registerParticle(res("stabilizer_particle"));
 

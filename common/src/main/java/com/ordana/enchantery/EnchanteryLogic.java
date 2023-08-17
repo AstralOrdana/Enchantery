@@ -193,7 +193,6 @@ public class EnchanteryLogic {
 
     //todo find better name
     public enum EnchantmentInfluencer {
-        AGUMENT(Enchantery.AMETHYST_PARTICLE.get()),
         CURSE_AGUMENT(Enchantery.CURSE_PARTICLE.get()),
         STABILIZER(Enchantery.STABILIZER_PARTICLE.get());
 
@@ -205,7 +204,6 @@ public class EnchanteryLogic {
 
         @Nullable
         public static EnchantmentInfluencer get(BlockState state) {
-            if (state.is(ModTags.ENCHANTMENT_AUGMENTS)) return AGUMENT;
             if (state.is(ModTags.ENCHANTMENT_STABILIZERS) && state.getBlock() instanceof CandleBlock && state.getValue(BlockStateProperties.LIT)) return STABILIZER;
             if (state.is(ModTags.CURSE_AUGMENTS)) return CURSE_AGUMENT;
             return null;
