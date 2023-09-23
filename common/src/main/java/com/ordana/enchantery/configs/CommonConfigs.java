@@ -15,6 +15,7 @@ public class CommonConfigs {
     public static Supplier<Boolean> SOULBOUND_MENDING_COMPAT;
     public static Supplier<Boolean> DISABLE_ANVIL_ENCHANTING;
     public static Supplier<Boolean> DISABLE_ANVIL_COST;
+    public static Supplier<Integer> ENCHANT_COUNT_BOOST;
 
     public static void init() {
         ConfigBuilder builder = ConfigBuilder.create(Enchantery.res("common"), ConfigType.COMMON);
@@ -25,6 +26,7 @@ public class CommonConfigs {
         SOULBOUND_MENDING_COMPAT = builder.define("soulbound_mending_compat", false);
         DISABLE_ANVIL_ENCHANTING = builder.define("disable_anvil_enchanting", true);
         DISABLE_ANVIL_COST = builder.define("disable_anvil_cost", true);
+        ENCHANT_COUNT_BOOST = builder.define("enchant_count_boost", 0, 0, 16);
         builder.pop();
 
         //fabric specific

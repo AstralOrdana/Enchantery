@@ -1,6 +1,7 @@
 package com.ordana.enchantery;
 
 import com.ordana.enchantery.access.EnchantmentTableBlockEntityAccess;
+import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.reg.ModEnchants;
 import com.ordana.enchantery.reg.ModTags;
 import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
@@ -12,7 +13,6 @@ import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -116,8 +116,7 @@ public class EnchanteryLogic {
 
 
     public static void modifyEnchantmentList(ContainerLevelAccess access, RandomSource random, ItemStack stack,
-                                             List<EnchantmentInstance> list) {
-        AtomicInteger aguments = new AtomicInteger();
+                                             List<EnchantmentInstance> list, int enchLevel) {
         AtomicInteger malus = new AtomicInteger();
         AtomicInteger stabilizers = new AtomicInteger();
         Map<Enchantment, Integer> enchants = new HashMap<>();
@@ -150,12 +149,19 @@ public class EnchanteryLogic {
 
         for (var e : enchants.entrySet()) {
             Enchantment en = e.getKey();
-            if (en.category.canEnchant(stack.getItem()) && !EnchanteryLogic.getHolder(en).is(ModTags.EXEMPT)) {
-                list.add(new EnchantmentInstance(en, Math.max(1, random.nextInt(e.getValue()))));
+            var holder = EnchanteryLogic.getHolder(en);
+            if (en.category.canEnchant(stack.getItem()) && !holder.is(ModTags.EXEMPT) && !holder.is(ModTags.BASIC)) {
+                var enchValue = random.nextInt(e.getValue()) + (stabilizers.get() / 4);
+                bookEnchants.add(new EnchantmentInstance(en, Math.min(enchValue + 1, e.getKey().getMaxLevel())));
             }
         }
-        //select single enchantment
-        WeightedRandom.getRandomItem(random, bookEnchants).ifPresent(list::add);
+
+        for (int j = 0; j < (enchLevel + 1 + CommonConfigs.ENCHANT_COUNT_BOOST.get()); ++j) {
+            if (bookEnchants.isEmpty()) break;
+            var listIndex = random.nextInt(bookEnchants.size());
+            list.add(bookEnchants.get(listIndex));
+            bookEnchants.remove(listIndex);
+        }
 
         //add curses
         int curses = malus.get() / 4;

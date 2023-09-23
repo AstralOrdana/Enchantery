@@ -2,7 +2,6 @@ package com.ordana.enchantery.mixins;
 
 import com.ordana.enchantery.EnchanteryLogic;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.EnchantmentMenu;
@@ -45,7 +44,7 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
                     shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void enchListMixin(ItemStack stack, int enchantSlot, int level, CallbackInfoReturnable<List<EnchantmentInstance>> cir,
                                List<EnchantmentInstance> list) {
-        EnchanteryLogic.modifyEnchantmentList(this.access, this.random, stack, list);
+        EnchanteryLogic.modifyEnchantmentList(this.access, this.random, stack, list, enchantSlot);
     }
 
     @Redirect(method = "getEnchantmentList",
