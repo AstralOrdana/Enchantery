@@ -1,15 +1,11 @@
 package com.ordana.enchantery.mixins;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.ordana.enchantery.EnchanteryClient;
 import com.ordana.enchantery.EnchanteryLogic;
 import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.reg.ModEnchants;
 import com.ordana.enchantery.reg.ModTags;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

@@ -1,6 +1,5 @@
 package com.ordana.enchantery.fabric;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.ordana.enchantery.events.BookshelfNameRendererEvent;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.Minecraft;
