@@ -13,7 +13,7 @@ public class ModTags {
     public static final TagKey<Item> CAN_BE_SOULBOUND = registerItemTag("can_be_soulbound");
 
     //blocks
-    public static final TagKey<Block> MOB_HEADS = registerBlockTag("mob_heads");
+    public static final TagKey<Block> VALID_BOOK_SOURCE = registerBlockTag("valid_book_source");
     public static final TagKey<Block> ENCHANTMENT_STABILIZERS = registerBlockTag("enchantment_stabilizers");
     public static final TagKey<Block> ENCHANTMENT_AUGMENTS = registerBlockTag("enchantment_augments");
     public static final TagKey<Block> CURSE_AUGMENTS = registerBlockTag("curse_augments");

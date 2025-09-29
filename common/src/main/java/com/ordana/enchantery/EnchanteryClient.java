@@ -2,6 +2,7 @@ package com.ordana.enchantery;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.ordana.enchantery.particles.RotatingEnchantingParticle;
+import com.ordana.enchantery.reg.ModParticles;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -17,8 +18,8 @@ public class EnchanteryClient {
         ClientHelper.addParticleRegistration(EnchanteryClient::registerParticles);
     }
     private static void registerParticles(ClientHelper.ParticleEvent event) {
-        event.register(Enchantery.STABILIZER_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
-        event.register(Enchantery.CURSE_PARTICLE.get(), RotatingEnchantingParticle.ProviderCurse::new);
+        event.register(ModParticles.STABILIZER_PARTICLE.get(), RotatingEnchantingParticle.ProviderStabilizer::new);
+        event.register(ModParticles.CURSE_PARTICLE.get(), RotatingEnchantingParticle.ProviderCurse::new);
     }
 
     public static void addEnchantParticles(Level level, BlockPos tablePos, BlockPos bookShelfPos) {

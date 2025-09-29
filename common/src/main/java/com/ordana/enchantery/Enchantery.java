@@ -4,6 +4,7 @@ import com.ordana.enchantery.configs.ClientConfigs;
 import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.loot_modifiers.LootTableOverrides;
 import com.ordana.enchantery.reg.ModEnchants;
+import com.ordana.enchantery.reg.ModParticles;
 import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
 import net.mehvahdjukaar.moonlight.api.events.MoonlightEventsHelper;
 import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
@@ -24,8 +25,9 @@ public class Enchantery {
     }
 
     public static void commonInit() {
-        LootTableOverrides.INSTANCE.register();
+        //LootTableOverrides.INSTANCE.register();
         ModEnchants.init();
+        ModParticles.init();
 
         CommonConfigs.init();
         if(PlatHelper.getPhysicalSide().isClient()){
@@ -40,7 +42,5 @@ public class Enchantery {
         EnchanteryLogic.setup();
     }
 
-    public static final RegSupplier<SimpleParticleType> CURSE_PARTICLE = RegHelper.registerParticle(res("curse_particle"));
-    public static final RegSupplier<SimpleParticleType> STABILIZER_PARTICLE = RegHelper.registerParticle(res("stabilizer_particle"));
 
 }

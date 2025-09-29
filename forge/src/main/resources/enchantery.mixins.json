@@ -6,7 +6,23 @@
   "client": [
   ],
   "mixins": [
-    "ServerPlayerGamemodeMixin"
+    "AnvilMixin",
+    "AxeItemMixin",
+    "BowItemMixin",
+    "ChiseledBookshelfMixin",
+    "CrossbowItemMixin",
+    "EnchantmentHelperMixin",
+    "EnchantmentMenuMixin",
+    "EnchantmentTableBlockEntityMixin",
+    "EnchantmentTableBlockMixin",
+    "ExperienceOrbMixin",
+    "ItemMixin",
+    "LivingEntityMixin",
+    "ServerPlayerGamemodeMixin",
+    "ServerPlayerMixin",
+    "SwordItemMixin",
+    "TooltipMixin",
+    "VillagerTradesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

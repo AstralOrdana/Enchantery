@@ -3,6 +3,7 @@ package com.ordana.enchantery;
 import com.ordana.enchantery.access.EnchantmentTableBlockEntityAccess;
 import com.ordana.enchantery.configs.CommonConfigs;
 import com.ordana.enchantery.reg.ModEnchants;
+import com.ordana.enchantery.reg.ModParticles;
 import com.ordana.enchantery.reg.ModTags;
 import net.mehvahdjukaar.moonlight.api.events.IDropItemOnDeathEvent;
 import net.minecraft.core.BlockPos;
@@ -134,7 +135,7 @@ public class EnchanteryLogic {
                     } else {
                         stabilizers.getAndAdd(4);
                     }
-                } else if (level.getBlockEntity(target) instanceof Container container) {
+                } else if (level.getBlockEntity(target) instanceof Container container && targetState.is(ModTags.VALID_BOOK_SOURCE)) {
                     for (int j = 0; j < container.getContainerSize(); ++j) {
                         if (container.getItem(j).is(Items.ENCHANTED_BOOK)) {
                             var enchList = EnchantmentHelper.getEnchantments(container.getItem(j));
@@ -197,8 +198,8 @@ public class EnchanteryLogic {
 
     //todo find better name
     public enum EnchantmentInfluencer {
-        CURSE_AGUMENT(Enchantery.CURSE_PARTICLE.get()),
-        STABILIZER(Enchantery.STABILIZER_PARTICLE.get());
+        CURSE_AGUMENT(ModParticles.CURSE_PARTICLE.get()),
+        STABILIZER(ModParticles.STABILIZER_PARTICLE.get());
 
         public final SimpleParticleType particle;
 

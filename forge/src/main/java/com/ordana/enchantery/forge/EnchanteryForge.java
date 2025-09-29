@@ -2,12 +2,8 @@ package com.ordana.enchantery.forge;
 
 import com.ordana.enchantery.Enchantery;
 import com.ordana.enchantery.EnchanteryClient;
-import com.ordana.enchantery.events.BookshelfNameRendererEvent;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,6 +17,7 @@ public class EnchanteryForge {
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             EnchanteryClient.init();
+            MinecraftForge.EVENT_BUS.register(RenderEvent.class);
         }
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -39,11 +36,5 @@ public class EnchanteryForge {
     }
      */
 
-    @SubscribeEvent
-    public static void onRenderLevel(RenderLevelStageEvent event){
-        if(event.getStage() == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
-            BookshelfNameRendererEvent.renderBookName(Minecraft.getInstance().level, Minecraft.getInstance().hitResult);
-        }
-    }
 }
 

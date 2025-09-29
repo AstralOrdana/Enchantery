@@ -17,9 +17,9 @@ public class RotatingEnchantingParticle extends TextureSheetParticle {
 
     protected RotatingEnchantingParticle(ClientLevel clientLevel, double x, double y, double z,
                                          double targetX, double targetY, double targetZ) {
-        super(clientLevel, x, y, z);
+        super(clientLevel, x, y -0.4, z);
         this.startX = x;
-        this.startY = y;
+        this.startY = y - 0.4;
         this.startZ = z;
         this.targetX = targetX;
         this.targetY = targetY;
